@@ -1,0 +1,43 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "Service is already configured.",
+      "cannot_connect": "Failed to connect to openSenseMap.",
+      "invalid_station": "The provided station ID does not exist on openSenseMap."
+    },
+    "error": {
+      "cannot_connect": "Failed to connect to openSenseMap.",
+      "invalid_station": "The provided station ID does not exist on openSenseMap."
+    },
+    "step": {
+      "user": {
+        "data": {
+          "station_id": "Station ID"
+        },
+        "data_description": {
+          "station_id": "The unique identifier of your openSenseMap station. You can find it in the URL when viewing the station on opensensemap.org."
+        },
+        "description": "Add an openSenseMap station to configure pulling/pushing measurements.",
+        "title": "Add openSenseMap Advanced Station"
+      }
+    }
+  },
+  "options": {
+    "error": {
+      "invalid_mappings_json": "Invalid JSON format. Expected a single object: {\"sensor.entity_id\": \"opensensemap_sensor_id\"}."
+    },
+    "step": {
+      "init": {
+        "data": {
+          "pull_enabled": "Enable Monitor Mode (Pull data)",
+          "scan_interval": "Update Interval (seconds)",
+          "retain_state": "Retain last known values on connection failure",
+          "push_enabled": "Enable Exporter Mode (Push data)",
+          "api_key": "API Key / Token (Optional)",
+          "push_mappings_json": "Push Sensor Mappings (JSON)"
+        },
+        "description": "Configure advanced behavior for this openSenseMap station."
+      }
+    }
+  }
+}

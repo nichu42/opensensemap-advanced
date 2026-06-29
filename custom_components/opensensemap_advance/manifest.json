@@ -1,0 +1,12 @@
+{
+  "domain": "opensensemap-advanced",
+  "name": "openSenseMap Advanced",
+  "codeowners": [],
+  "config_flow": true,
+  "documentation": "https://codeberg.org/nichu42/opensensemap-advanced",
+  "integration_type": "service",
+  "iot_class": "cloud_polling",
+  "quality_scale": "platinum",
+  "requirements": ["opensensemap-api==0.2.1"],
+  "version": "0.10"
+}
