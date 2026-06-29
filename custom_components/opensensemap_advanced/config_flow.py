@@ -15,6 +15,8 @@
 
 """Config flow and Options flow for openSenseMap Advanced integration."""
 
+from __future__ import annotations
+
 import asyncio
 import json
 import socket
@@ -110,7 +112,7 @@ class OpenSenseMapConfigFlow(ConfigFlow, domain=DOMAIN):
     @override
     def async_get_options_flow(
         config_entry: Any,
-    ) -> "OpenSenseMapOptionsFlowHandler":
+    ) -> OpenSenseMapOptionsFlowHandler:
         """Get the options flow for this handler."""
         return OpenSenseMapOptionsFlowHandler()
 

@@ -15,6 +15,8 @@
 
 """Sensor platform for the openSenseMap Advanced integration."""
 
+from __future__ import annotations
+
 from typing import override
 
 from homeassistant.components.sensor import (

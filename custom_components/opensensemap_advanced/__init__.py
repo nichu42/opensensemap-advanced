@@ -15,6 +15,8 @@
 
 """The openSenseMap Advanced integration."""
 
+from __future__ import annotations
+
 import asyncio
 from dataclasses import dataclass
 import json
@@ -39,7 +41,7 @@ class OpenSenseMapRuntimeData:
     """Runtime data for the openSenseMap Advanced integration."""
 
     coordinator: OpenSenseMapCoordinator | None = None
-    push_manager: "OpenSenseMapPushManager" | None = None
+    push_manager: OpenSenseMapPushManager | None = None
 
 
 async def async_setup_entry(
