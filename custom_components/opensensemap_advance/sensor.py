@@ -137,7 +137,7 @@ async def async_setup_entry(
     if not entry.options.get("pull_enabled", entry.data.get("pull_enabled", True)):
         return
 
-    coordinator = entry.runtime_data
+    coordinator = entry.runtime_data.coordinator
 
     entities: list[OpenSenseMapSensor] = []
     for description in SENSOR_DESCRIPTIONS:

@@ -107,15 +107,11 @@ class OpenSenseMapConfigFlow(ConfigFlow, domain=DOMAIN):
         config_entry: Any,
     ) -> "OpenSenseMapOptionsFlowHandler":
         """Get the options flow for this handler."""
-        return OpenSenseMapOptionsFlowHandler(config_entry)
+        return OpenSenseMapOptionsFlowHandler()
 
 
 class OpenSenseMapOptionsFlowHandler(OptionsFlow):
     """Handle openSenseMap Advanced options."""
-
-    def __init__(self, config_entry: Any) -> None:
-        """Initialize options flow."""
-        self.config_entry = config_entry
 
     @override
     async def async_step_init(

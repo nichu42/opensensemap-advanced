@@ -22,7 +22,10 @@
 
 from dataclasses import dataclass
 from datetime import timedelta
-from typing import NamedTuple, override
+from typing import TYPE_CHECKING, NamedTuple, override
+
+if TYPE_CHECKING:
+    from . import OpenSenseMapRuntimeData
 
 from opensensemap_api import _TITLES, OpenSenseMap
 from opensensemap_api.exceptions import OpenSenseMapError
@@ -104,7 +107,7 @@ def _detect_unit(
     return None
 
 
-type OpenSenseMapConfigEntry = ConfigEntry[OpenSenseMapCoordinator]
+type OpenSenseMapConfigEntry = ConfigEntry["OpenSenseMapRuntimeData"]
 
 
 class OpenSenseMapCoordinator(DataUpdateCoordinator[OpenSenseMapStationData]):
