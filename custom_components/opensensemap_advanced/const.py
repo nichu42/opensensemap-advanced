@@ -22,7 +22,7 @@
 
 import logging
 
-DOMAIN = "opensensemap_advance"
+DOMAIN = "opensensemap_advanced"
 
 LOGGER = logging.getLogger(__name__)
 

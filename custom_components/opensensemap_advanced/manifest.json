@@ -1,5 +1,5 @@
 {
-  "domain": "opensensemap-advanced",
+  "domain": "opensensemap_advanced",
   "name": "openSenseMap Advanced",
   "codeowners": [],
   "config_flow": true,
