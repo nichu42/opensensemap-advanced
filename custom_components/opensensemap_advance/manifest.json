@@ -3,7 +3,7 @@
   "name": "openSenseMap Advanced",
   "codeowners": [],
   "config_flow": true,
-  "documentation": "https://codeberg.org/nichu42/opensensemap-advanced",
+  "documentation": "https://github.com/nichu42/opensensemap-advanced",
   "integration_type": "service",
   "iot_class": "cloud_polling",
   "quality_scale": "platinum",

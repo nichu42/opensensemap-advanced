@@ -1,11 +1,13 @@
 # openSenseMap Advanced for Home Assistant
 
+> ℹ️ **Project Home:** This integration is developed and maintained on **[Codeberg](https://codeberg.org/nichu42/opensensemap-advanced)**. If you are viewing this on GitHub, this is a read-only mirror. Please submit all issues, pull requests, and contributions directly to Codeberg.
+
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg)](https://github.com/hacs/integration)
 
 An advanced, feature-rich custom integration for [openSenseMap](https://opensensemap.org) in Home Assistant. This is a hard fork of the official Home Assistant `opensensemap` integration, designed for power users who need finer control, reliability, and / or the ability to upload local sensor data.
 
-It is designed to live as a standalone custom integration.
+It is developed on Codeberg and mirrored to GitHub to support HACS.
 
 ---
 
@@ -30,8 +32,8 @@ It is designed to live as a standalone custom integration.
 
 1. Open **HACS** (Home Assistant Community Store).
 2. Click the three dots in the top-right corner and select **Custom repositories**.
-3. Paste the URL of your Codeberg repository:
-   `https://codeberg.org/nichu42/opensensemap-advanced`
+3. Paste the URL of the GitHub mirror repository:
+   `https://github.com/nichu42/opensensemap-advanced`
 4. Select **Integration** as the Category and click **Add**.
 5. Find **openSenseMap Advanced** in HACS and click **Download**.
 6. Restart Home Assistant.
@@ -65,5 +67,5 @@ Once added, click **Configure** on the integration card to adjust the settings:
 
 ## 🧑‍💻 Credits & License
 
-* **Base Code:** This integration is derived from the official Home Assistant Core `opensensemap` component developed by `@AlCalzone` and the Home Assistant Core contributors under the Apache License 2.0.
+* **Base Code:** This integration is derived from the official [Home Assistant Core openSenseMap component](https://github.com/home-assistant/core/tree/dev/homeassistant/components/opensensemap) developed by [@AlCalzone](https://github.com/AlCalzone) and the Home Assistant Core contributors under the Apache License 2.0.
 * **License:** Licensed under the [GNU General Public License v3 (GPLv3)](./LICENSE). Modifications and extensions are copyright (c) 2026 nichu42 and contributors <nichu42@42bit.email>.
