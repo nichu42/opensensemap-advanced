@@ -107,7 +107,7 @@ def _detect_unit(
     return None
 
 
-type OpenSenseMapConfigEntry = ConfigEntry["OpenSenseMapRuntimeData"]
+OpenSenseMapConfigEntry = ConfigEntry["OpenSenseMapRuntimeData"]
 
 
 class OpenSenseMapCoordinator(DataUpdateCoordinator[OpenSenseMapStationData]):

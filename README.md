@@ -69,3 +69,27 @@ Once added, click **Configure** on the integration card to adjust the settings:
 
 * **Base Code:** This integration is derived from the official [Home Assistant Core openSenseMap component](https://github.com/home-assistant/core/tree/dev/homeassistant/components/opensensemap) developed by [@AlCalzone](https://github.com/AlCalzone) and the Home Assistant Core contributors under the Apache License 2.0.
 * **License:** Licensed under the [GNU General Public License v3 (GPLv3)](./LICENSE). Modifications and extensions are copyright (c) 2026 nichu42 and contributors <nichu42@42bit.email>.
+
+---
+
+## 🌍 Data, Geocoding & Attribution
+
+### openSenseMap API
+This app utilizes the open API provided by [openSenseMap](https://opensensemap.org), an open-source platform dedicated to collecting and exploring environmental sensor data from around the globe.
+
+* **What is openSenseMap?** Originally emerged from a research project at the University of Münster (Germany), openSenseMap has grown into one of the largest citizen-operated sensor networks in the world. It provides a free platform for schools, universities, scientists, and citizen enthusiasts to publish real-time environmental measurements—such as air quality, temperature, and humidity—and share them as Open Data.
+* **Who operates it?** The platform is operated and maintained by openSenseLab gGmbH, a non-profit organization based in Münster, Germany, dedicated to promoting digital sovereignty, education, and public participation in scientific environmental monitoring.
+* **Support Open Data!** openSenseMap is completely free to use and relies heavily on community contributions and donations to keep its servers running and its data accessible to all. If you love the environmental insights provided in this app, please consider supporting their project:
+  * **Explore:** [opensensemap.org](https://opensensemap.org)
+  * **Build:** [sensebox.de](https://sensebox.de)
+  * **Donate:** [Donate via Betterplace](https://www.betterplace.org/en/projects/89947-opensensemap-org-the-free-map-for-environmental-data)
+
+---
+
+## ⚠️ Disclaimers
+
+### Affiliation Disclaimer
+This integration is an independent project and is not affiliated with, endorsed by, or connected to openSenseMap (openSenseLab gGmbH).
+
+### Trademark & Logo Usage
+The openSenseMap logo and icon used in this integration are property of their respective owners. They are used here under nominative fair use to identify the service this integration connects to.
