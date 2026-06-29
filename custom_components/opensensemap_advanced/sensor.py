@@ -1,5 +1,4 @@
-# Copyright (c) 2026 nichu42 and contributors <nichu42@42bit.email>
-# Originally derived from Home Assistant Core (Copyright (c) The Home Assistant Authors)
+# Copyright (c) 2026 nichu42 <nichu42@42bit.email> and contributors
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -13,118 +12,64 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
-#
-# Original Home Assistant code is licensed under the Apache License 2.0.
-# A copy of the Apache License 2.0 can be found in the LICENSE-APACHE file.
-# Modifications made by nichu42 and contributors.
 
-"""Support for openSenseMap Advanced sensors."""
+"""Sensor platform for the openSenseMap Advanced integration."""
 
-from collections.abc import Callable
-from dataclasses import dataclass
 from typing import override
 
 from homeassistant.components.sensor import (
     SensorDeviceClass,
     SensorEntity,
-    SensorEntityDescription,
     SensorStateClass,
 )
-from homeassistant.const import (
-    DEGREE,
-    LIGHT_LUX,
-    UnitOfDensity,
-    UnitOfPressure,
-    UnitOfRatio,
-    UnitOfSpeed,
-    UnitOfTemperature,
-)
 from homeassistant.core import HomeAssistant
-from homeassistant.helpers.device_registry import DeviceEntryType, DeviceInfo
+from homeassistant.helpers.device_registry import DeviceInfo
 from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
-from .const import CONF_STATION_ID, DOMAIN, INTEGRATION_TITLE
-from .coordinator import (
-    Measurement,
-    OpenSenseMapConfigEntry,
-    OpenSenseMapCoordinator,
-    OpenSenseMapStationData,
-)
+from .const import DOMAIN
+from .coordinator import OpenSenseMapConfigEntry, OpenSenseMapCoordinator
 
 
-@dataclass(frozen=True, kw_only=True)
-class OpenSenseMapSensorEntityDescription(SensorEntityDescription):
-    """Describes openSenseMap sensor entities."""
+def _determine_device_class(title: str, unit: str) -> SensorDeviceClass | None:
+    """Helper to dynamically map sensor titles/units to Home Assistant device classes."""
+    title_lower = title.lower()
+    unit_lower = unit.lower().strip()
 
-    value_fn: Callable[[OpenSenseMapStationData], Measurement]
+    # Temperature mapping
+    if unit_lower in ("°c", "c", "°f", "f", "k") or "temperatur" in title_lower:
+        return SensorDeviceClass.TEMPERATURE
 
+    # Humidity mapping
+    if unit_lower == "%" and ("humidity" in title_lower or "feuchte" in title_lower or "feuchtigkeit" in title_lower):
+        return SensorDeviceClass.HUMIDITY
 
-SENSOR_DESCRIPTIONS: tuple[OpenSenseMapSensorEntityDescription, ...] = (
-    OpenSenseMapSensorEntityDescription(
-        key="pm2_5",
-        device_class=SensorDeviceClass.PM25,
-        native_unit_of_measurement=UnitOfDensity.MICROGRAMS_PER_CUBIC_METER,
-        state_class=SensorStateClass.MEASUREMENT,
-        value_fn=lambda data: data.pm2_5,
-    ),
-    OpenSenseMapSensorEntityDescription(
-        key="pm10",
-        device_class=SensorDeviceClass.PM10,
-        native_unit_of_measurement=UnitOfDensity.MICROGRAMS_PER_CUBIC_METER,
-        state_class=SensorStateClass.MEASUREMENT,
-        value_fn=lambda data: data.pm10,
-    ),
-    OpenSenseMapSensorEntityDescription(
-        key="pm1_0",
-        device_class=SensorDeviceClass.PM1,
-        native_unit_of_measurement=UnitOfDensity.MICROGRAMS_PER_CUBIC_METER,
-        state_class=SensorStateClass.MEASUREMENT,
-        value_fn=lambda data: data.pm1_0,
-    ),
-    OpenSenseMapSensorEntityDescription(
-        key="temperature",
-        device_class=SensorDeviceClass.TEMPERATURE,
-        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
-        state_class=SensorStateClass.MEASUREMENT,
-        value_fn=lambda data: data.temperature,
-    ),
-    OpenSenseMapSensorEntityDescription(
-        key="humidity",
-        device_class=SensorDeviceClass.HUMIDITY,
-        native_unit_of_measurement=UnitOfRatio.PERCENTAGE,
-        state_class=SensorStateClass.MEASUREMENT,
-        value_fn=lambda data: data.humidity,
-    ),
-    OpenSenseMapSensorEntityDescription(
-        key="air_pressure",
-        device_class=SensorDeviceClass.ATMOSPHERIC_PRESSURE,
-        native_unit_of_measurement=UnitOfPressure.HPA,
-        state_class=SensorStateClass.MEASUREMENT,
-        value_fn=lambda data: data.air_pressure,
-    ),
-    OpenSenseMapSensorEntityDescription(
-        key="illuminance",
-        device_class=SensorDeviceClass.ILLUMINANCE,
-        native_unit_of_measurement=LIGHT_LUX,
-        state_class=SensorStateClass.MEASUREMENT,
-        value_fn=lambda data: data.illuminance,
-    ),
-    OpenSenseMapSensorEntityDescription(
-        key="wind_speed",
-        device_class=SensorDeviceClass.WIND_SPEED,
-        native_unit_of_measurement=UnitOfSpeed.METERS_PER_SECOND,
-        state_class=SensorStateClass.MEASUREMENT,
-        value_fn=lambda data: data.wind_speed,
-    ),
-    OpenSenseMapSensorEntityDescription(
-        key="wind_direction",
-        device_class=SensorDeviceClass.WIND_DIRECTION,
-        native_unit_of_measurement=DEGREE,
-        state_class=SensorStateClass.MEASUREMENT_ANGLE,
-        value_fn=lambda data: data.wind_direction,
-    ),
-)
+    # Atmospheric Pressure mapping
+    if unit_lower in ("hpa", "pa", "bar", "mbar", "kpa") or "pressure" in title_lower or "luftdruck" in title_lower:
+        return SensorDeviceClass.PRESSURE
+
+    # Illuminance mapping
+    if unit_lower in ("lx", "lux") or "illuminance" in title_lower or "helligkeit" in title_lower or "licht" in title_lower:
+        return SensorDeviceClass.ILLUMINANCE
+
+    # Particulate Matter mapping
+    if "µg/m³" in unit_lower or "ug/m³" in unit_lower or "g/m³" in unit_lower:
+        if "pm2.5" in title_lower or "pm25" in title_lower or "pm2_5" in title_lower:
+            return SensorDeviceClass.PM25
+        if "pm10" in title_lower:
+            return SensorDeviceClass.PM10
+        if "pm1" in title_lower:
+            return SensorDeviceClass.PM1
+
+    # Carbon Dioxide mapping
+    if unit_lower == "ppm" and "co2" in title_lower:
+        return SensorDeviceClass.CO2
+
+    # Wind Speed mapping
+    if unit_lower in ("m/s", "km/h", "mph", "kts") or "windgeschwindigkeit" in title_lower or "wind speed" in title_lower:
+        return SensorDeviceClass.WIND_SPEED
+
+    return None
 
 
 async def async_setup_entry(
@@ -132,51 +77,74 @@ async def async_setup_entry(
     entry: OpenSenseMapConfigEntry,
     async_add_entities: AddConfigEntryEntitiesCallback,
 ) -> None:
-    """Set up openSenseMap sensors from a config entry."""
-    # Check if pull mode is enabled
+    """Set up openSenseMap sensors dynamically from a config entry."""
+    # Check if pulling is enabled for this entry
     if not entry.options.get("pull_enabled", entry.data.get("pull_enabled", True)):
         return
 
     coordinator = entry.runtime_data.coordinator
+    if not coordinator or not coordinator.data:
+        return
 
-    entities: list[OpenSenseMapSensor] = []
-    for description in SENSOR_DESCRIPTIONS:
-        measurement = description.value_fn(coordinator.data)
-        if measurement.value is None:
-            continue
-        native_unit = measurement.unit or description.native_unit_of_measurement
-        entities.append(OpenSenseMapSensor(coordinator, description, native_unit))
+    # Add entities for all sensors configured on the station
+    entities = [
+        OpenSenseMapSensor(coordinator, sensor_id)
+        for sensor_id in coordinator.data.sensors
+    ]
     async_add_entities(entities)
 
 
 class OpenSenseMapSensor(CoordinatorEntity[OpenSenseMapCoordinator], SensorEntity):
-    """Sensor entity representing a single measurement from an openSenseMap station."""
+    """Sensor entity representing a single dynamic measurement from an openSenseMap station."""
 
     _attr_attribution = "Data provided by openSenseMap"
     _attr_has_entity_name = True
-    entity_description: OpenSenseMapSensorEntityDescription
 
-    def __init__(
-        self,
-        coordinator: OpenSenseMapCoordinator,
-        description: OpenSenseMapSensorEntityDescription,
-        native_unit: str | None,
-    ) -> None:
+    def __init__(self, coordinator: OpenSenseMapCoordinator, sensor_id: str) -> None:
         """Initialize the sensor."""
         super().__init__(coordinator)
-        self.entity_description = description
-        self._attr_native_unit_of_measurement = native_unit
-        station_id = coordinator.config_entry.data[CONF_STATION_ID]
-        self._attr_unique_id = f"{station_id}_{description.key}"
-        self._attr_device_info = DeviceInfo(
-            entry_type=DeviceEntryType.SERVICE,
-            identifiers={(DOMAIN, station_id)},
-            manufacturer=INTEGRATION_TITLE,
-            configuration_url=f"https://opensensemap.org/explore/{station_id}",
-        )
+        self.sensor_id = sensor_id
+
+        # Use the station ID and sensor ID to generate a unique ID
+        self._attr_unique_id = f"opensensemap_sensor_{sensor_id}"
+
+        # Populate static attributes from the initial fetch configurations
+        sensor_config = coordinator.data.sensors[sensor_id]
+        self._attr_name = sensor_config.title
+        self._attr_native_unit_of_measurement = sensor_config.unit or None
+        self._attr_device_class = _determine_device_class(sensor_config.title, sensor_config.unit)
+        self._attr_state_class = SensorStateClass.MEASUREMENT
 
     @property
     @override
-    def native_value(self) -> float | str | None:
-        """Return the latest value reported by the station."""
-        return self.entity_description.value_fn(self.coordinator.data).value
+    def native_value(self) -> float | None:
+        """Return the current sensor value."""
+        # Safeguard if sensor list dynamically changes or is empty
+        if self.sensor_id not in self.coordinator.data.sensors:
+            return None
+        return self.coordinator.data.sensors[self.sensor_id].value
+
+    @property
+    @override
+    def extra_state_attributes(self) -> dict[str, Any]:
+        """Return additional info about the sensor."""
+        if self.sensor_id not in self.coordinator.data.sensors:
+            return {}
+        sensor_config = self.coordinator.data.sensors[self.sensor_id]
+        return {
+            "sensor_id": self.sensor_id,
+            "sensor_type": sensor_config.sensor_type,
+            "last_measurement": sensor_config.created_at,
+        }
+
+    @property
+    @override
+    def device_info(self) -> DeviceInfo:
+        """Return device details linking all sensors to a single station device."""
+        return DeviceInfo(
+            identifiers={(DOMAIN, self.coordinator.station_id)},
+            name=self.coordinator.data.name,
+            model=self.coordinator.data.model,
+            manufacturer="openSenseMap",
+            configuration_url=f"https://opensensemap.org/explore/{self.coordinator.station_id}",
+        )

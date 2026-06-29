@@ -1,43 +1,40 @@
 {
   "config": {
-    "abort": {
-      "already_configured": "Service is already configured.",
-      "cannot_connect": "Failed to connect to openSenseMap.",
-      "invalid_station": "The provided station ID does not exist on openSenseMap."
-    },
-    "error": {
-      "cannot_connect": "Failed to connect to openSenseMap.",
-      "invalid_station": "The provided station ID does not exist on openSenseMap."
-    },
     "step": {
       "user": {
+        "title": "Set up openSenseMap Advanced",
+        "description": "Enter the ID of your openSenseMap station (senseBox). You can find this in the URL of your station on opensensemap.org.",
         "data": {
-          "station_id": "Station ID"
-        },
-        "data_description": {
-          "station_id": "The unique identifier of your openSenseMap station. You can find it in the URL when viewing the station on opensensemap.org."
-        },
-        "description": "Add an openSenseMap station to configure pulling/pushing measurements.",
-        "title": "Add openSenseMap Advanced Station"
+          "station_id": "Station ID (senseBox ID)"
+        }
       }
+    },
+    "error": {
+      "cannot_connect": "Failed to connect to openSenseMap. Please check your internet connection and try again.",
+      "invalid_station": "Station ID not found on openSenseMap. Please verify the ID."
+    },
+    "abort": {
+      "already_configured": "This openSenseMap station is already configured."
     }
   },
   "options": {
-    "error": {
-      "invalid_mappings_json": "Invalid JSON format. Expected a single object: {\"sensor.entity_id\": \"opensensemap_sensor_id\"}."
-    },
     "step": {
       "init": {
+        "title": "Configure openSenseMap Advanced Options",
+        "description": "Configure pull and push settings. Map Home Assistant entity states to openSenseMap sensor IDs in JSON format (e.g., `{\"sensor.my_temp\": \"opensensemap_sensor_id\"}`).",
         "data": {
-          "pull_enabled": "Enable Monitor Mode (Pull data)",
-          "scan_interval": "Update Interval (seconds)",
-          "retain_state": "Retain last known values on connection failure",
-          "push_enabled": "Enable Exporter Mode (Push data)",
-          "api_key": "API Key / Token (Optional)",
-          "push_mappings_json": "Push Sensor Mappings (JSON)"
-        },
-        "description": "Configure advanced behavior for this openSenseMap station."
+          "pull_enabled": "Enable Pull Mode (Fetch station data)",
+          "scan_interval": "Pull Scan Interval (seconds)",
+          "retain_state": "Retain last known states on network timeout",
+          "push_enabled": "Enable Push Mode (Export local data)",
+          "api_key": "openSenseMap API Key (Required for Push)",
+          "push_mappings_json": "Entity Mappings JSON (dict of ha_entity_id: sensebox_sensor_id)"
+        }
       }
+    },
+    "error": {
+      "api_key_required": "API Key is required to enable Push Mode.",
+      "invalid_mappings": "Invalid Entity Mappings JSON format. Ensure it is a valid JSON dictionary mapping string entity IDs to string sensor IDs."
     }
   }
 }

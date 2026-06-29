@@ -5,7 +5,7 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg)](https://github.com/hacs/integration)
 
-An advanced, feature-rich custom integration for [openSenseMap](https://opensensemap.org) in Home Assistant. This is a hard fork of the official Home Assistant `opensensemap` integration, designed for power users who need finer control, reliability, and / or the ability to upload local sensor data.
+An advanced, feature-rich custom integration for [openSenseMap](https://opensensemap.org) in Home Assistant. This integration is built entirely from scratch with zero external dependencies, designed for power users who need finer control, reliability, and the ability to upload local sensor data.
 
 It is developed on Codeberg and mirrored to GitHub to support HACS.
 
@@ -13,18 +13,25 @@ It is developed on Codeberg and mirrored to GitHub to support HACS.
 
 ## ✨ Features
 
-1. **⏱️ Customizable Update Intervals**
-   * *Official:* Hardcoded to update once every 10 minutes.
-   * *Advanced:* Set your own polling frequency (e.g., once every 70 seconds) directly in the integration's Options UI.
+1. **🔍 Dynamic Sensor Discovery (Zero-Configuration)**
+   * *Official:* Limited to 9 pre-defined sensor types and requires translations for non-English sensor titles.
+   * *Advanced:* Automatically discovers and generates Home Assistant sensor entities for **every sensor** configured on your senseBox (e.g., CO2, UV index, noise, PM, soil moisture, battery voltage). It uses your custom sensor titles and units directly from openSenseMap.
 
-2. **🛡️ Offline State Caching (Fallback)**
-   * *Official:* Marks all sensors as `unavailable` if the API fails or drops connection.
+2. **🏷️ Device Class & Unit Auto-Mapping**
+   * *Advanced:* Automatically detects and maps your sensors' units and titles to standard Home Assistant device classes (e.g., Temperature, Humidity, Pressure, Wind Speed, Illuminance, PM25, PM10, PM1, CO2) for correct UI icons, history graphs, and scaling.
+
+3. **⏱️ Customizable Update Intervals**
+   * *Official:* Hardcoded to pull data once every 10 minutes.
+   * *Advanced:* Set your own polling frequency (e.g., once every 60 seconds) directly in the integration's Options UI.
+
+4. **🛡️ Offline State Caching (Fallback)**
+   * *Official:* Marks all sensors as `unavailable` if the API fails or connection drops.
    * *Advanced:* Opt-in to retain the **last known valid value** during API or internet outages, keeping your history graphs and automations stable.
 
-3. **📤 Sensor Data Upload (Exporter/Push Mode)**
+5. **📤 Sensor Data Upload (Exporter/Push Mode)**
    * *Official:* Read-only (Pulling data).
    * *Advanced:* Bridge your local Home Assistant sensors (Zigbee, ESPHome, RTL_433, templates, etc.) directly to your openSenseMap Box.
-   * *Debounced Submissions:* All updates are batched and sent in a single consolidated HTTP request every 5 seconds to reduce API overhead.
+   * *Debounced Submissions:* All updates are batched and sent in a single consolidated HTTP POST request every 5 seconds to reduce API overhead.
 
 ---
 
@@ -65,10 +72,9 @@ Once added, click **Configure** on the integration card to adjust the settings:
 
 ---
 
-## 🧑‍💻 Credits & License
+## 🧑‍💻 License
 
-* **Base Code:** This integration is derived from the official [Home Assistant Core openSenseMap component](https://github.com/home-assistant/core/tree/dev/homeassistant/components/opensensemap) developed by [@AlCalzone](https://github.com/AlCalzone) and the Home Assistant Core contributors under the Apache License 2.0.
-* **License:** Licensed under the [GNU General Public License v3 (GPLv3)](./LICENSE). Modifications and extensions are copyright (c) 2026 nichu42 and contributors <nichu42@42bit.email>.
+Licensed under the [GNU General Public License v3 (GPLv3)](./LICENSE). Copyright (c) 2026 nichu42 <nichu42@42bit.email> and contributors.
 
 ---
 
