@@ -3,7 +3,7 @@
     "step": {
       "user": {
         "title": "Welkom bij openSenseMap Advanced",
-        "description": "Kies hoe u uw openSenseMap-station (senseBox) wilt configureren:\n\n• **Pull-modus (Monitor):** Haalt periodiek omgevingsmetingen op van uw station en maakt sensor-entiteiten aan in Home Assistant.\n• **Push-modus (Exporter):** Stuurt lokale Home Assistant-sensorstatussen rechtstreeks naar uw openSenseMap Box.\n\n*Tip: U vindt uw Box-ID in de URL van de pagina van uw station op [openSenseMap](https://opensensemap.org) (de alfanumerieke reeks aan het einde van de URL).* ",
+        "description": "Kies hoe je je openSenseMap-station (senseBox) wilt configureren:\n\n• **Pull-modus (Monitor):** Haalt periodiek omgevingsmetingen op van je station en maakt sensor-entiteiten aan in Home Assistant.\n• **Push-modus (Exporter):** Stuurt lokale Home Assistant-sensorstatussen rechtstreeks naar je openSenseMap Box.\n\n*Tip: Je vindt je Box-ID in de URL van de pagina van je station op [openSenseMap](https://opensensemap.org) (de alfanumerieke reeks aan het einde van de URL).* ",
         "data": {
           "station_id": "Station-ID (senseBox-ID)",
           "pull_enabled": "Pull-modus inschakelen (Monitor)",
@@ -12,7 +12,7 @@
       },
       "push_api_key": {
         "title": "Push API-sleutel configureren",
-        "description": "Om metingen te uploaden heeft u een openSenseMap-account en een geregistreerde senseBox nodig:\n\n1. Registreer een account op [opensensemap.org/account/register](https://opensensemap.org/account/register).\n2. Registreer een nieuwe senseBox in uw dashboard.\n3. Selecteer uw model onder **Hardware**. **Kies Handmatige configuratie (Manual configuration) om generieke Home Assistant-sensoren te uploaden** (zoals Zigbee of ESPHome) en definieer handmatig de sensoren die u wilt exporteren (bijv. titel 'Temperatuur', eenheid '°C').\n4. Kopieer de API-sleutel uit uw openSenseMap-profiel en plak deze hieronder:",
+        "description": "Om metingen te uploaden heb je een openSenseMap-account en een geregistreerde senseBox nodig:\n\n1. Registreer een account op [opensensemap.org/account/register](https://opensensemap.org/account/register).\n2. Registreer een nieuwe senseBox in je dashboard.\n3. Selecteer je model onder **Hardware**. **Kies Handmatige configuratie (Manual configuration) om generieke Home Assistant-sensoren te uploaden** (zoals Zigbee of ESPHome) en definieer handmatig de sensoren die je wilt exporteren (bijv. titel 'Temperatuur', eenheid '°C').\n4. Kopieer de API-sleutel uit je openSenseMap-profiel en plak deze hieronder:",
         "data": {
           "api_key": "openSenseMap API-sleutel"
         }
@@ -26,7 +26,7 @@
       },
       "pull_config": {
         "title": "Pull-modus configureren (Monitor)",
-        "description": "Stel het interval in voor het ophalen van metingen en kies of u de laatst bekende statussen wilt behouden tijdens netwerkstoringen.",
+        "description": "Stel het interval in voor het ophalen van metingen en kies of je de laatst bekende statussen wilt behouden tijdens netwerkstoringen.",
         "data": {
           "scan_interval": "Update-interval (seconden)",
           "retain_state": "Laatst bekende statussen behouden bij netwerktimeout"
@@ -34,9 +34,9 @@
       }
     },
     "error": {
-      "cannot_connect": "Verbinding met openSenseMap mislukt. Controleer uw internetverbinding en probeer het opnieuw.",
+      "cannot_connect": "Verbinding met openSenseMap mislukt. Controleer je internetverbinding en probeer het opnieuw.",
       "invalid_station": "Station-ID niet gevonden op openSenseMap. Controleer de ID.",
-      "select_at_least_one_mode": "U moet ten minste één modus selecteren: Pull-modus of Push-modus.",
+      "select_at_least_one_mode": "Je moet ten minste één modus selecteren: Pull-modus of Push-modus.",
       "api_key_required": "API-sleutel is vereist om de Push-modus in te schakelen."
     },
     "abort": {

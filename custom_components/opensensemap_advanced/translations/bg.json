@@ -3,7 +3,7 @@
     "step": {
       "user": {
         "title": "Добре дошли в openSenseMap Advanced",
-        "description": "Изберете как искате да конфигурирате вашата openSenseMap станция (senseBox):\n\n• **Режим Pull (Мониторинг):** Периодично извлича измервания от вашата станция и създава сензори в Home Assistant.\n• **Режим Push (Експортиране):** Изпраща състоянията на локалните сензори от Home Assistant директно към вашата openSenseMap Box.\n\n*Съвет: Можете да намерите идентификатора на вашата Box в URL адреса на страницата на вашата станция в [openSenseMap](https://opensensemap.org) (буквено-цифровия низ в края на URL адреса).* ",
+        "description": "Избери как искаш да конфигурираш твоята openSenseMap станция (senseBox):\n\n• **Режим Pull (Мониторинг):** Периодично извлича измервания от твоята станция и създава сензори в Home Assistant.\n• **Режим Push (Експортиране):** Изпраща състоянията на локалните сензори от Home Assistant директно към твоята openSenseMap Box.\n\n*Съвет: Можеш да намериш идентификатора на твоята Box в URL адреса на страницата на твоята станция в [openSenseMap](https://opensensemap.org) (буквено-цифровия низ в края на URL адреса).* ",
         "data": {
           "station_id": "Идентификатор на станцията (senseBox ID)",
           "pull_enabled": "Активиране на режим Pull (Мониторинг)",
@@ -12,21 +12,21 @@
       },
       "push_api_key": {
         "title": "Конфигуриране на API ключ за Push",
-        "description": "За да качвате измервания, се нуждаете от акаунт в openSenseMap и регистриран senseBox:\n\n1. Регистрирайте акаунт на [opensensemap.org/account/register](https://opensensemap.org/account/register).\n2. Регистрирайте нов senseBox във вашето табло.\n3. В секция **Хардуер (Hardware)** изберете вашия модел. **За качване на общи сензори от Home Assistant** (като Zigbee или ESPHome), изберете **Ръчна конфигурация (Manual configuration)** и дефинирайте ръчно сензорите, които искате да експортирате (напр. заглавие 'Temperatur', мерна единица '°C').\n4. Копирайте API ключа от вашия профил в openSenseMap и го поставете по-долу:",
+        "description": "За да качваш измервания, се нуждаеш от акаунт в openSenseMap и регистриран senseBox:\n\n1. Регистрирай акаунт на [opensensemap.org/account/register](https://opensensemap.org/account/register).\n2. Регистрирай нов senseBox в твоето табло.\n3. В секция **Хардуер (Hardware)** избери твоя модел. **За качване на общи сензори от Home Assistant** (като Zigbee или ESPHome), избери **Ръчна конфигурация (Manual configuration)** и дефинирай ръчно сензорите, които искаш да експортираш (напр. заглавие 'Temperatur', мерна единица '°C').\n4. Копирай API ключа от твоя профил в openSenseMap и го постави по-долу:",
         "data": {
           "api_key": "API ключ за openSenseMap"
         }
       },
       "push_config": {
         "title": "Свързване на сензори от senseBox",
-        "description": "Свържете локален сензор от Home Assistant със сензора на openSenseMap:\n\n**{sensor_name}** ({sensor_type}) [{sensor_unit}]\n\nИзберете локалния сензор за експортиране или оставете празно за пропускане:",
+        "description": "Свържи локален сензор от Home Assistant със сензора на openSenseMap:\n\n**{sensor_name}** ({sensor_type}) [{sensor_unit}]\n\nИзбери локалния сензор за експортиране или остави празно за пропускане:",
         "data": {
           "entity_id": "Локален сензор"
         }
       },
       "pull_config": {
         "title": "Конфигуриране на режим Pull (Мониторинг)",
-        "description": "Задайте интервала за извличане на измерванията и изберете дали да се запазват последните известни състояния при прекъсване на мрежовата връзка.",
+        "description": "Задай интервала за извличане на измерванията и избери дали да се запазват последните известни състояния при прекъсване на мрежовата връзка.",
         "data": {
           "scan_interval": "Интервал на извличане (секунди)",
           "retain_state": "Запазване на последните състояния при мрежов таймаут"
@@ -34,9 +34,9 @@
       }
     },
     "error": {
-      "cannot_connect": "Връзката с openSenseMap пропадна. Моля, проверете интернет връзката си и опитайте отново.",
-      "invalid_station": "Станцията не е намерена в openSenseMap. Моля, проверете идентификатора.",
-      "select_at_least_one_mode": "Трябва да изберете поне един режим: Режим Pull или Режим Push.",
+      "cannot_connect": "Връзката с openSenseMap пропадна. Моля, провери интернет връзката си и опитай отново.",
+      "invalid_station": "Станцията не е намерена в openSenseMap. Моля, провери идентификатора.",
+      "select_at_least_one_mode": "Трябва да избереш поне един режим: Режим Pull или Режим Push.",
       "api_key_required": "Изисква се API ключ за активиране на режим Push."
     },
     "abort": {
@@ -47,7 +47,7 @@
     "step": {
       "init": {
         "title": "Конфигуриране на опции за openSenseMap Advanced",
-        "description": "Конфигурирайте настройките за извличане (pull) и изпращане (push) на данни.",
+        "description": "Конфигурирай настройките за извличане (pull) и изпращане (push) на данни.",
         "data": {
           "pull_enabled": "Активиране на режим Pull (Извличане на данни)",
           "scan_interval": "Интервал на извличане (секунди)",
@@ -59,7 +59,7 @@
       },
       "push_config": {
         "title": "Свързване на сензори от senseBox",
-        "description": "Свържете локален сензор от Home Assistant със сензора на openSenseMap:\n\n**{sensor_name}** ({sensor_type}) [{sensor_unit}]\n\nИзберете локалния сензор за експортиране или оставете празно за пропускане:",
+        "description": "Свържи локален сензор от Home Assistant със сензора на openSenseMap:\n\n**{sensor_name}** ({sensor_type}) [{sensor_unit}]\n\nИзбери локалния сензор за експортиране или остави празно за пропускане:",
         "data": {
           "entity_id": "Локален сензор"
         }

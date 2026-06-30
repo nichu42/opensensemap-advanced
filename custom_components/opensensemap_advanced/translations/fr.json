@@ -3,7 +3,7 @@
     "step": {
       "user": {
         "title": "Bienvenue sur openSenseMap Advanced",
-        "description": "Choisissez comment vous souhaitez configurer votre station openSenseMap (senseBox) :\n\n• **Mode Pull (Moniteur) :** Récupère périodiquement les mesures environnementales de votre station et crée des entités de capteurs dans Home Assistant.\n• **Mode Push (Exportateur) :** Envoie les états des capteurs locaux de Home Assistant directement à votre openSenseMap Box.\n\n*Conseil : Vous pouvez trouver l'ID de votre Box dans l'URL de la page de votre station sur [openSenseMap](https://opensensemap.org) (la chaîne alphanumérique à la fin de l'URL).* ",
+        "description": "Choisis comment tu souhaites configurer ta station openSenseMap (senseBox) :\n\n• **Mode Pull (Moniteur) :** Récupère périodiquement les mesures environnementales de ta station et crée des entités de capteurs dans Home Assistant.\n• **Mode Push (Exportateur) :** Envoie les états des capteurs locaux de Home Assistant directement à ta openSenseMap Box.\n\n*Conseil : Tu peux trouver l'ID de ta Box dans l'URL de la page de ta station sur [openSenseMap](https://opensensemap.org) (la chaîne alphanumérique à la fin de l'URL).* ",
         "data": {
           "station_id": "ID de la Station (ID senseBox)",
           "pull_enabled": "Activer le mode Pull (Moniteur)",
@@ -12,21 +12,21 @@
       },
       "push_api_key": {
         "title": "Configurer la clé API de Push",
-        "description": "Pour télécharger des mesures, vous devez avoir un compte openSenseMap et une senseBox enregistrée :\n\n1. Enregistrez un compte sur [opensensemap.org/account/register](https://opensensemap.org/account/register).\n2. Enregistrez une nouvelle senseBox dans votre tableau de bord.\n3. Sous **Matériel (Hardware)**, sélectionnez votre modèle. **Pour télécharger des capteurs Home Assistant génériques** (comme Zigbee ou ESPHome), choisissez **Configuration manuelle** et définissez manuellement les capteurs que vous souhaitez exporter (par exemple, titre 'Temperature', unité '°C').\n4. Copiez la clé API depuis votre profil openSenseMap et collez-la ci-dessous :",
+        "description": "Pour télécharger des mesures, tu dois avoir un compte openSenseMap et une senseBox enregistrée :\n\n1. Enregistre un compte sur [opensensemap.org/account/register](https://opensensemap.org/account/register).\n2. Enregistre une nouvelle senseBox dans ton tableau de bord.\n3. Sous **Matériel (Hardware)**, sélectionne ton modèle. **Pour télécharger des capteurs Home Assistant génériques** (comme Zigbee ou ESPHome), choisis **Configuration manuelle** et définis manuellement les capteurs que tu souhaites exporter (par exemple, titre 'Temperature', unité '°C').\n4. Copie la clé API depuis ton profil openSenseMap et colle-la ci-dessous :",
         "data": {
           "api_key": "Clé API openSenseMap"
         }
       },
       "push_config": {
         "title": "Associer les capteurs de la senseBox",
-        "description": "Associez une entité locale de Home Assistant au capteur openSenseMap :\n\n**{sensor_name}** ({sensor_type}) [{sensor_unit}]\n\nSélectionnez l'entité locale à exporter, ou laissez vide pour passer :",
+        "description": "Associe une entité locale de Home Assistant au capteur openSenseMap :\n\n**{sensor_name}** ({sensor_type}) [{sensor_unit}]\n\nSélectionne l'entité locale à exporter, ou laisse vide pour passer :",
         "data": {
           "entity_id": "Entité locale"
         }
       },
       "pull_config": {
         "title": "Configurer le mode Pull (Moniteur)",
-        "description": "Définissez l'intervalle de récupération des mesures et choisissez si vous souhaitez conserver les derniers états connus en cas de perte de connexion réseau.",
+        "description": "Définis l'intervalle de récupération des mesures et choisis si tu souhaites conserver les derniers états connus en cas de perte de connexion réseau.",
         "data": {
           "scan_interval": "Intervalle de récupération (secondes)",
           "retain_state": "Conserver les derniers états connus en cas de timeout réseau"
@@ -34,9 +34,9 @@
       }
     },
     "error": {
-      "cannot_connect": "Échec de connexion à openSenseMap. Veuillez vérifier votre connexion Internet et réessayer.",
-      "invalid_station": "ID de station introuvable sur openSenseMap. Veuillez vérifier l'ID.",
-      "select_at_least_one_mode": "Vous devez sélectionner au moins un mode : Mode Pull ou Mode Push.",
+      "cannot_connect": "Échec de connexion à openSenseMap. Vérifie ta connexion Internet et réessaye.",
+      "invalid_station": "ID de station introuvable sur openSenseMap. Vérifie l'ID.",
+      "select_at_least_one_mode": "Tu dois sélectionner au moins un mode : Mode Pull ou Mode Push.",
       "api_key_required": "La clé API est requise pour activer le mode Push."
     },
     "abort": {
@@ -47,7 +47,7 @@
     "step": {
       "init": {
         "title": "Configurer les options d'openSenseMap Advanced",
-        "description": "Configurez les paramètres de pull et de push.",
+        "description": "Configure les paramètres de pull et de push.",
         "data": {
           "pull_enabled": "Activer le mode Pull (Récupérer les données de la station)",
           "scan_interval": "Intervalle de récupération (secondes)",
@@ -59,7 +59,7 @@
       },
       "push_config": {
         "title": "Associer les capteurs de la senseBox",
-        "description": "Associez une entité locale de Home Assistant au capteur openSenseMap :\n\n**{sensor_name}** ({sensor_type}) [{sensor_unit}]\n\nSélectionnez l'entité locale à exporter, ou laissez vide pour passer :",
+        "description": "Associe une entité locale de Home Assistant au capteur openSenseMap :\n\n**{sensor_name}** ({sensor_type}) [{sensor_unit}]\n\nSélectionne l'entité locale à exporter, ou laisse vide pour passer :",
         "data": {
           "entity_id": "Entité locale"
         }
