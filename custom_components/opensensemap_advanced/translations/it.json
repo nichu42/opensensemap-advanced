@@ -1,0 +1,72 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Benvenuto in openSenseMap Advanced",
+        "description": "Scegli come configurare la tua stazione openSenseMap (senseBox):\n\n• **Modalità Pull (Monitoraggio):** Recupera periodicamente le misurazioni ambientali della stazione e crea entità sensore in Home Assistant.\n• **Modalità Push (Esportazione):** Invia gli stati dei sensori locali di Home Assistant direttamente alla tua openSenseMap Box.\n\n*Suggerimento: Puoi trovare l'ID della tua Box nell'URL della pagina della stazione su [openSenseMap](https://opensensemap.org) (la stringa alfanumerica alla fine dell'URL).* ",
+        "data": {
+          "station_id": "ID Stazione (ID senseBox)",
+          "pull_enabled": "Abilita Modalità Pull (Monitoraggio)",
+          "push_enabled": "Abilita Modalità Push (Esportazione)"
+        }
+      },
+      "push_api_key": {
+        "title": "Configura la chiave API di Push",
+        "description": "Per caricare le misurazioni, hai bisogno di un account openSenseMap e di una senseBox registrata:\n\n1. Registra un account su [opensensemap.org/account/register](https://opensensemap.org/account/register).\n2. Registra una nuova senseBox nella tua dashboard.\n3. Sotto **Hardware**, seleziona il tuo modello. **Per caricare sensori generici di Home Assistant** (come Zigbee o ESPHome), scegli **Configurazione manuale** e definisci manualmente i sensori che desideri esportare (ad es. titolo 'Temperatura', unità '°C').\n4. Copia la chiave API dal tuo profilo openSenseMap e incollala qui sotto:",
+        "data": {
+          "api_key": "Chiave API openSenseMap"
+        }
+      },
+      "push_config": {
+        "title": "Associa sensori della senseBox",
+        "description": "Associa un'entità Home Assistant locale al sensore openSenseMap:\n\n**{sensor_name}** ({sensor_type}) [{sensor_unit}]\n\nSeleziona l'entità locale da esportare, o lascia vuoto per saltare:",
+        "data": {
+          "entity_id": "Entità locale"
+        }
+      },
+      "pull_config": {
+        "title": "Configura la Modalità Pull (Monitoraggio)",
+        "description": "Imposta l'intervallo per il recupero delle misurazioni e scegli se mantenere gli ultimi stati noti durante le interruzioni di rete.",
+        "data": {
+          "scan_interval": "Intervallo di aggiornamento (secondi)",
+          "retain_state": "Mantieni ultimi stati noti in caso di timeout della rete"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Connessione a openSenseMap fallita. Verifica la connessione Internet e riprova.",
+      "invalid_station": "ID della stazione non trovato su openSenseMap. Verifica l'ID.",
+      "select_at_least_one_mode": "Devi selezionare almeno una modalità: Pull o Push.",
+      "api_key_required": "La chiave API è richiesta per abilitare la Modalità Push."
+    },
+    "abort": {
+      "already_configured": "Questa stazione openSenseMap è già configurata."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Configura le opzioni di openSenseMap Advanced",
+        "description": "Configura le impostazioni di pull e push.",
+        "data": {
+          "pull_enabled": "Abilita Modalità Pull (Recupera dati stazione)",
+          "scan_interval": "Intervallo di aggiornamento (secondi)",
+          "retain_state": "Mantieni ultimi stati noti in caso di timeout della rete",
+          "push_enabled": "Abilita Modalità Push (Esporta dati locali)",
+          "api_key": "Chiave API openSenseMap (Richiesta per Push)",
+          "push_interval": "Intervallo minimo di push (secondi)"
+        }
+      },
+      "push_config": {
+        "title": "Associa sensori della senseBox",
+        "description": "Associa un'entità Home Assistant locale al sensore openSenseMap:\n\n**{sensor_name}** ({sensor_type}) [{sensor_unit}]\n\nSeleziona l'entità locale da esportare, o lascia vuoto per saltare:",
+        "data": {
+          "entity_id": "Entità locale"
+        }
+      }
+    },
+    "error": {
+      "api_key_required": "La chiave API è richiesta per abilitare la Modalità Push."
+    }
+  }
+}

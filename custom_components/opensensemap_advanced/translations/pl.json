@@ -1,0 +1,72 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Witamy w openSenseMap Advanced",
+        "description": "Wybierz sposób konfiguracji swojej stacji openSenseMap (senseBox):\n\n• **Tryb Pull (Monitorowanie):** Okresowo pobiera pomiary środowiskowe z Twojej stacji i tworzy encje czujników w Home Assistant.\n• **Tryb Push (Eksport):** Wysyła stany lokalnych czujników Home Assistant bezpośrednio do Twojego openSenseMap Box.\n\n*Wskazówka: Identyfikator Box ID znajdziesz w adresie URL strony swojej stacji na [openSenseMap](https://opensensemap.org) (ciąg alfanumeryczny na końcu adresu URL).* ",
+        "data": {
+          "station_id": "Identyfikator stacji (senseBox ID)",
+          "pull_enabled": "Włącz tryb Pull (Monitorowanie)",
+          "push_enabled": "Włącz tryb Push (Eksport)"
+        }
+      },
+      "push_api_key": {
+        "title": "Skonfiguruj klucz API dla trybu Push",
+        "description": "Aby przesyłać pomiary, potrzebujesz konta openSenseMap oraz zarejestrowanej stacji senseBox:\n\n1. Zarejestruj konto na stronie [opensensemap.org/account/register](https://opensensemap.org/account/register).\n2. Zarejestruj nową stację senseBox w swoim panelu.\n3. W sekcji **Sprzęt (Hardware)** wybierz swój model. **Aby przesyłać dane z dowolnych czujników Home Assistant** (np. Zigbee lub ESPHome), wybierz **Konfiguracja ręczna (Manual configuration)** i zdefiniuj ręcznie czujniki, które chcesz eksportować (np. nazwa 'Temperatur', jednostka '°C').\n4. Skopiuj klucz API ze swojego profilu openSenseMap i wklej go poniżej:",
+        "data": {
+          "api_key": "Klucz API openSenseMap"
+        }
+      },
+      "push_config": {
+        "title": "Przypisz czujniki senseBox",
+        "description": "Przypisz lokalną encję Home Assistant do czujnika openSenseMap:\n\n**{sensor_name}** ({sensor_type}) [{sensor_unit}]\n\nWybierz lokalną encję do eksportu lub pozostaw puste, aby pominąć:",
+        "data": {
+          "entity_id": "Lokalna encja"
+        }
+      },
+      "pull_config": {
+        "title": "Skonfiguruj tryb Pull (Monitorowanie)",
+        "description": "Ustaw interwał pobierania pomiarów oraz określ, czy zachować ostatnie znane stany w przypadku utraty połączenia sieciowego.",
+        "data": {
+          "scan_interval": "Interwał pobierania (sekundy)",
+          "retain_state": "Zachowaj ostatnie znane stany w przypadku limitu czasu sieci"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Połączenie z openSenseMap nie powiodło się. Sprawdź połączenie internetowe i spróbuj ponownie.",
+      "invalid_station": "Nie znaleziono identyfikatora stacji w openSenseMap. Sprawdź poprawność identyfikatora.",
+      "select_at_least_one_mode": "Musisz wybrać przynajmniej jeden tryb: tryb Pull lub tryb Push.",
+      "api_key_required": "Klucz API jest wymagany do włączenia trybu Push."
+    },
+    "abort": {
+      "already_configured": "Ta stacja openSenseMap jest już skonfigurowana."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Konfiguracja opcji openSenseMap Advanced",
+        "description": "Skonfiguruj ustawienia pobierania (pull) i wysyłania (push) danych.",
+        "data": {
+          "pull_enabled": "Włącz tryb Pull (Pobieranie danych ze stacji)",
+          "scan_interval": "Interwał pobierania (sekundy)",
+          "retain_state": "Zachowaj ostatnie znane stany w przypadku limitu czasu sieci",
+          "push_enabled": "Włącz tryb Push (Eksport lokalnych danych)",
+          "api_key": "Klucz API openSenseMap (Wymagany do eksportu)",
+          "push_interval": "Minimalny interwał wysyłania (sekundy)"
+        }
+      },
+      "push_config": {
+        "title": "Przypisz czujniki senseBox",
+        "description": "Przypisz lokalną encję Home Assistant do czujnika openSenseMap:\n\n**{sensor_name}** ({sensor_type}) [{sensor_unit}]\n\nWybierz lokalną encję do eksportu lub pozostaw puste, aby pominąć:",
+        "data": {
+          "entity_id": "Lokalna encja"
+        }
+      }
+    },
+    "error": {
+      "api_key_required": "Klucz API jest wymagany do włączenia trybu Push."
+    }
+  }
+}

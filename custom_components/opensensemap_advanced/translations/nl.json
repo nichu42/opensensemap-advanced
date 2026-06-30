@@ -1,0 +1,72 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Welkom bij openSenseMap Advanced",
+        "description": "Kies hoe u uw openSenseMap-station (senseBox) wilt configureren:\n\n• **Pull-modus (Monitor):** Haalt periodiek omgevingsmetingen op van uw station en maakt sensor-entiteiten aan in Home Assistant.\n• **Push-modus (Exporter):** Stuurt lokale Home Assistant-sensorstatussen rechtstreeks naar uw openSenseMap Box.\n\n*Tip: U vindt uw Box-ID in de URL van de pagina van uw station op [openSenseMap](https://opensensemap.org) (de alfanumerieke reeks aan het einde van de URL).* ",
+        "data": {
+          "station_id": "Station-ID (senseBox-ID)",
+          "pull_enabled": "Pull-modus inschakelen (Monitor)",
+          "push_enabled": "Push-modus inschakelen (Exporter)"
+        }
+      },
+      "push_api_key": {
+        "title": "Push API-sleutel configureren",
+        "description": "Om metingen te uploaden heeft u een openSenseMap-account en een geregistreerde senseBox nodig:\n\n1. Registreer een account op [opensensemap.org/account/register](https://opensensemap.org/account/register).\n2. Registreer een nieuwe senseBox in uw dashboard.\n3. Selecteer uw model onder **Hardware**. **Kies Handmatige configuratie (Manual configuration) om generieke Home Assistant-sensoren te uploaden** (zoals Zigbee of ESPHome) en definieer handmatig de sensoren die u wilt exporteren (bijv. titel 'Temperatuur', eenheid '°C').\n4. Kopieer de API-sleutel uit uw openSenseMap-profiel en plak deze hieronder:",
+        "data": {
+          "api_key": "openSenseMap API-sleutel"
+        }
+      },
+      "push_config": {
+        "title": "senseBox-sensoren koppelen",
+        "description": "Koppel een lokale Home Assistant-entiteit aan de openSenseMap-sensor:\n\n**{sensor_name}** ({sensor_type}) [{sensor_unit}]\n\nSelecteer de lokale entiteit om te exporteren, of laat leeg om over te slaan:",
+        "data": {
+          "entity_id": "Lokale entiteit"
+        }
+      },
+      "pull_config": {
+        "title": "Pull-modus configureren (Monitor)",
+        "description": "Stel het interval in voor het ophalen van metingen en kies of u de laatst bekende statussen wilt behouden tijdens netwerkstoringen.",
+        "data": {
+          "scan_interval": "Update-interval (seconden)",
+          "retain_state": "Laatst bekende statussen behouden bij netwerktimeout"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Verbinding met openSenseMap mislukt. Controleer uw internetverbinding en probeer het opnieuw.",
+      "invalid_station": "Station-ID niet gevonden op openSenseMap. Controleer de ID.",
+      "select_at_least_one_mode": "U moet ten minste één modus selecteren: Pull-modus of Push-modus.",
+      "api_key_required": "API-sleutel is vereist om de Push-modus in te schakelen."
+    },
+    "abort": {
+      "already_configured": "Dit openSenseMap-station is al geconfigureerd."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Opties voor openSenseMap Advanced configureren",
+        "description": "Configureer de pull- en pushinstellingen.",
+        "data": {
+          "pull_enabled": "Pull-modus inschakelen (Stationgegevens ophalen)",
+          "scan_interval": "Update-interval (seconden)",
+          "retain_state": "Laatst bekende statussen behouden bij netwerktimeout",
+          "push_enabled": "Push-modus inschakelen (Lokale gegevens exporteren)",
+          "api_key": "openSenseMap API-sleutel (Vereist voor Push)",
+          "push_interval": "Minimaal push-interval (seconden)"
+        }
+      },
+      "push_config": {
+        "title": "senseBox-sensoren koppelen",
+        "description": "Koppel een lokale Home Assistant-entiteit aan de openSenseMap-sensor:\n\n**{sensor_name}** ({sensor_type}) [{sensor_unit}]\n\nSelecteer de lokale entiteit om te exporteren, of laat leeg om over te slaan:",
+        "data": {
+          "entity_id": "Lokale entiteit"
+        }
+      }
+    },
+    "error": {
+      "api_key_required": "API-sleutel is vereist om de Push-modus in te schakelen."
+    }
+  }
+}

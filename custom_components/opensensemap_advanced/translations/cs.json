@@ -1,0 +1,72 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Vítejte v openSenseMap Advanced",
+        "description": "Vyberte, jak chcete nakonfigurovat svoji stanici openSenseMap (senseBox):\n\n• **Režim Pull (Monitorování):** Periodicky stahuje měření z vaší stanice a vytváří senzory v Home Assistant.\n• **Režim Push (Export):** Odesílá stavy lokálních senzorů Home Assistant přímo do vaší openSenseMap Box.\n\n*Tip: ID své Box najdete v adrese URL stránky vaší stanice na [openSenseMap](https://opensensemap.org) (alfanumerický řetězec na konci adresy URL).* ",
+        "data": {
+          "station_id": "ID stanice (senseBox ID)",
+          "pull_enabled": "Povolit režim Pull (Monitorování)",
+          "push_enabled": "Povolit režim Push (Export)"
+        }
+      },
+      "push_api_key": {
+        "title": "Nakonfigurovat API klíč pro Push",
+        "description": "Pro nahrávání měření potřebujete účet openSenseMap a registrovaný senseBox:\n\n1. Zaregistrujte si účet na [opensensemap.org/account/register](https://opensensemap.org/account/register).\n2. Ve svém přehledu zaregistrujte nový senseBox.\n3. V části **Hardware** vyberte svůj model. **Chcete-li nahrávat obecné senzory Home Assistant** (např. Zigbee nebo ESPHome), zvolte **Ruční konfigurace (Manual configuration)** a ručně definujte senzory, které chcete exportovat (např. název 'Temperatur', jednotka '°C').\n4. Zkopírujte API klíč ze svého profilu openSenseMap a vložte jej níže:",
+        "data": {
+          "api_key": "API klíč openSenseMap"
+        }
+      },
+      "push_config": {
+        "title": "Přiřadit senzory senseBox",
+        "description": "Přiřaďte lokální entitu Home Assistant k senzoru openSenseMap:\n\n**{sensor_name}** ({sensor_type}) [{sensor_unit}]\n\nVyberte lokální entitu k exportu, nebo nechte prázdné pro přeskočení:",
+        "data": {
+          "entity_id": "Lokální entita"
+        }
+      },
+      "pull_config": {
+        "title": "Nakonfigurovat režim Pull (Monitorování)",
+        "description": "Nastavte interval pro stahování měření a zvolte, zda chcete zachovat poslední známé stavy při výpadku sítě.",
+        "data": {
+          "scan_interval": "Interval aktualizace (sekundy)",
+          "retain_state": "Zachovat poslední známé stavy při vypršení časového limitu sítě"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Připojení k openSenseMap selhalo. Zkontrolujte prosím své internetové připojení a zkuste to znovu.",
+      "invalid_station": "ID stanice nebylo na openSenseMap nalezeno. Ověřte prosím ID.",
+      "select_at_least_one_mode": "Musíte vybrat alespoň jeden režim: režim Pull nebo režim Push.",
+      "api_key_required": "Pro aktivaci režimu Push je vyžadován API klíč."
+    },
+    "abort": {
+      "already_configured": "Tato stanice openSenseMap je již nakonfigurována."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Konfigurace voleb openSenseMap Advanced",
+        "description": "Nakonfigurujte nastavení pro stahování (pull) a odesílání (push) dat.",
+        "data": {
+          "pull_enabled": "Povolit režim Pull (Stahování dat ze stanice)",
+          "scan_interval": "Interval aktualizace (sekundy)",
+          "retain_state": "Zachovat poslední známé stavy při vypršení časového limitu sítě",
+          "push_enabled": "Povolit režim Push (Export lokálních dat)",
+          "api_key": "API klíč openSenseMap (Vyžadován pro Push)",
+          "push_interval": "Minimální interval odesílání (sekundy)"
+        }
+      },
+      "push_config": {
+        "title": "Přiřadit senzory senseBox",
+        "description": "Přiřaďte lokální entitu Home Assistant k senzoru openSenseMap:\n\n**{sensor_name}** ({sensor_type}) [{sensor_unit}]\n\nVyberte lokální entitu k exportu, nebo nechte prázdné pro přeskočení:",
+        "data": {
+          "entity_id": "Lokální entita"
+        }
+      }
+    },
+    "error": {
+      "api_key_required": "Pro aktivaci režimu Push je vyžadován API klíč."
+    }
+  }
+}

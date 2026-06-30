@@ -1,0 +1,72 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Добре дошли в openSenseMap Advanced",
+        "description": "Изберете как искате да конфигурирате вашата openSenseMap станция (senseBox):\n\n• **Режим Pull (Мониторинг):** Периодично извлича измервания от вашата станция и създава сензори в Home Assistant.\n• **Режим Push (Експортиране):** Изпраща състоянията на локалните сензори от Home Assistant директно към вашата openSenseMap Box.\n\n*Съвет: Можете да намерите идентификатора на вашата Box в URL адреса на страницата на вашата станция в [openSenseMap](https://opensensemap.org) (буквено-цифровия низ в края на URL адреса).* ",
+        "data": {
+          "station_id": "Идентификатор на станцията (senseBox ID)",
+          "pull_enabled": "Активиране на режим Pull (Мониторинг)",
+          "push_enabled": "Активиране на режим Push (Експортиране)"
+        }
+      },
+      "push_api_key": {
+        "title": "Конфигуриране на API ключ за Push",
+        "description": "За да качвате измервания, се нуждаете от акаунт в openSenseMap и регистриран senseBox:\n\n1. Регистрирайте акаунт на [opensensemap.org/account/register](https://opensensemap.org/account/register).\n2. Регистрирайте нов senseBox във вашето табло.\n3. В секция **Хардуер (Hardware)** изберете вашия модел. **За качване на общи сензори от Home Assistant** (като Zigbee или ESPHome), изберете **Ръчна конфигурация (Manual configuration)** и дефинирайте ръчно сензорите, които искате да експортирате (напр. заглавие 'Temperatur', мерна единица '°C').\n4. Копирайте API ключа от вашия профил в openSenseMap и го поставете по-долу:",
+        "data": {
+          "api_key": "API ключ за openSenseMap"
+        }
+      },
+      "push_config": {
+        "title": "Свързване на сензори от senseBox",
+        "description": "Свържете локален сензор от Home Assistant със сензора на openSenseMap:\n\n**{sensor_name}** ({sensor_type}) [{sensor_unit}]\n\nИзберете локалния сензор за експортиране или оставете празно за пропускане:",
+        "data": {
+          "entity_id": "Локален сензор"
+        }
+      },
+      "pull_config": {
+        "title": "Конфигуриране на режим Pull (Мониторинг)",
+        "description": "Задайте интервала за извличане на измерванията и изберете дали да се запазват последните известни състояния при прекъсване на мрежовата връзка.",
+        "data": {
+          "scan_interval": "Интервал на извличане (секунди)",
+          "retain_state": "Запазване на последните състояния при мрежов таймаут"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Връзката с openSenseMap пропадна. Моля, проверете интернет връзката си и опитайте отново.",
+      "invalid_station": "Станцията не е намерена в openSenseMap. Моля, проверете идентификатора.",
+      "select_at_least_one_mode": "Трябва да изберете поне един режим: Режим Pull или Режим Push.",
+      "api_key_required": "Изисква се API ключ за активиране на режим Push."
+    },
+    "abort": {
+      "already_configured": "Тази openSenseMap станция вече е конфигурирана."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Конфигуриране на опции за openSenseMap Advanced",
+        "description": "Конфигурирайте настройките за извличане (pull) и изпращане (push) на данни.",
+        "data": {
+          "pull_enabled": "Активиране на режим Pull (Извличане на данни)",
+          "scan_interval": "Интервал на извличане (секунди)",
+          "retain_state": "Запазване на последните състояния при мрежов таймаут",
+          "push_enabled": "Активиране на режим Push (Експортиране на локални данни)",
+          "api_key": "API ключ за openSenseMap (Изисква се за Push)",
+          "push_interval": "Минимален интервал за push (секунди)"
+        }
+      },
+      "push_config": {
+        "title": "Свързване на сензори от senseBox",
+        "description": "Свържете локален сензор от Home Assistant със сензора на openSenseMap:\n\n**{sensor_name}** ({sensor_type}) [{sensor_unit}]\n\nИзберете локалния сензор за експортиране или оставете празно за пропускане:",
+        "data": {
+          "entity_id": "Локален сензор"
+        }
+      }
+    },
+    "error": {
+      "api_key_required": "Изисква се API ключ за активиране на режим Push."
+    }
+  }
+}

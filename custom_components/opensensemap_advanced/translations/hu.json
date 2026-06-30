@@ -1,0 +1,72 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Üdvözli az openSenseMap Advanced",
+        "description": "Válassza ki, hogyan szeretné konfigurálni az openSenseMap állomását (senseBox):\n\n• **Pull mód (Monitor):** Rendszeresen lekéri a környezeti méréseket az állomásról, és érzékelő entitásokat hoz létre a Home Assistantban.\n• **Push mód (Exportőr):** Közvetlenül az openSenseMap Box-ba küldi a helyi Home Assistant érzékelők állapotát.\n\n*Tipp: A Box ID-t az állomás oldalának URL-címében találja meg az [openSenseMap](https://opensensemap.org) oldalon (az URL végén található alfanumerikus karakterlánc).* ",
+        "data": {
+          "station_id": "Állomás ID (senseBox ID)",
+          "pull_enabled": "Pull mód engedélyezése (Monitor)",
+          "push_enabled": "Push mód engedélyezése (Exportőr)"
+        }
+      },
+      "push_api_key": {
+        "title": "Push API kulcs konfigurálása",
+        "description": "A mérések feltöltéséhez egy openSenseMap fiókra és egy regisztrált senseBox-ra van szüksége:\n\n1. Regisztráljon egy fiókot a [opensensemap.org/account/register](https://opensensemap.org/account/register) oldalon.\n2. Regisztráljon egy új senseBox-ot az irányítópultján.\n3. A **Hardver (Hardware)** menüpont alatt válassza ki a modellt. **Általános Home Assistant érzékelők** (pl. Zigbee vagy ESPHome) feltöltéséhez válassza a **Kézi konfiguráció** lehetőséget, és adja meg manuálisan az exportálni kívánt érzékelőket (pl. név 'Temperatur', mértékegység '°C').\n4. Másolja ki az API kulcsot az openSenseMap profiljából, és illessze be alább:",
+        "data": {
+          "api_key": "openSenseMap API kulcs"
+        }
+      },
+      "push_config": {
+        "title": "senseBox érzékelők társítása",
+        "description": "Társítson egy helyi Home Assistant entitást az openSenseMap érzékelőhöz:\n\n**{sensor_name}** ({sensor_type}) [{sensor_unit}]\n\nVálassza ki az exportálni kívánt helyi entitást, vagy hagyja üresen a kihagyáshoz:",
+        "data": {
+          "entity_id": "Helyi entitás"
+        }
+      },
+      "pull_config": {
+        "title": "Pull mód konfigurálása (Monitor)",
+        "description": "Adja meg a mérések lekérdezésének gyakoriságát, és döntse el, hogy hálózati kimaradás esetén meg szeretné-e tartani a legutóbbi ismert értékeket.",
+        "data": {
+          "scan_interval": "Frissítési időköz (másodperc)",
+          "retain_state": "Legutóbbi ismert állapotok megtartása hálózati timeout esetén"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Nem sikerült kapcsolódni az openSenseMap-hez. Kérjük, ellenőrizze az internetkapcsolatot, és próbálja újra.",
+      "invalid_station": "Az állomás ID nem található az openSenseMap-en. Kérjük, ellenőrizze az ID-t.",
+      "select_at_least_one_mode": "Legalább egy módot ki kell választania: Pull mód vagy Push mód.",
+      "api_key_required": "A Push mód engedélyezéséhez meg kell adnia az API kulcsot."
+    },
+    "abort": {
+      "already_configured": "Ez az openSenseMap állomás már konfigurálva van."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "openSenseMap Advanced opciók konfigurálása",
+        "description": "Konfigurálja a lekérdezési (pull) és feltöltési (push) beállításokat.",
+        "data": {
+          "pull_enabled": "Pull mód engedélyezése (Állomásadatok lekérése)",
+          "scan_interval": "Frissítési időköz (másodperc)",
+          "retain_state": "Legutóbbi ismert állapotok megtartása hálózati timeout esetén",
+          "push_enabled": "Push mód engedélyezése (Helyi adatok exportálása)",
+          "api_key": "openSenseMap API kulcs (Szükséges a push-hoz)",
+          "push_interval": "Minimális push időköz (másodperc)"
+        }
+      },
+      "push_config": {
+        "title": "senseBox érzékelők társítása",
+        "description": "Társítson egy helyi Home Assistant entitást az openSenseMap érzékelőhöz:\n\n**{sensor_name}** ({sensor_type}) [{sensor_unit}]\n\nVálassza ki az exportálni kívánt helyi entitást, vagy hagyja üresen a kihagyáshoz:",
+        "data": {
+          "entity_id": "Helyi entitás"
+        }
+      }
+    },
+    "error": {
+      "api_key_required": "A Push mód engedélyezéséhez meg kell adnia az API kulcsot."
+    }
+  }
+}

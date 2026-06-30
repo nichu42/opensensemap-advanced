@@ -1,0 +1,72 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Welcome to openSenseMap Advanced",
+        "description": "Choose how you want to configure your openSenseMap station (senseBox):\n\n• **Pull Mode (Monitor):** Periodically fetch environmental measurements from your station and create sensor entities in Home Assistant.\n• **Push Mode (Exporter):** Send local Home Assistant sensor states directly to your openSenseMap Box.\n\n*Tip: You can find your Box ID in the URL of your station's page on [openSenseMap](https://opensensemap.org) (e.g. the alphanumeric string at the end of the URL).* ",
+        "data": {
+          "station_id": "Station ID (senseBox ID)",
+          "pull_enabled": "Enable Pull Mode (Monitor)",
+          "push_enabled": "Enable Push Mode (Exporter)"
+        }
+      },
+      "push_api_key": {
+        "title": "Configure Push API Key",
+        "description": "To upload measurements, you need an openSenseMap account and a registered senseBox:\n\n1. Register an account at [opensensemap.org/account/register](https://opensensemap.org/account/register).\n2. Register a new senseBox in your dashboard.\n3. Under **Hardware**, select your model. **To upload generic Home Assistant sensors** (like Zigbee or ESPHome), choose **Manual configuration** and manually define the sensors you want to export (e.g. title 'Temperatur', unit '°C').\n4. Copy the API Key from your openSenseMap profile and paste it below:",
+        "data": {
+          "api_key": "openSenseMap API Key"
+        }
+      },
+      "push_config": {
+        "title": "Map senseBox Sensors",
+        "description": "Map a local Home Assistant entity to the openSenseMap sensor:\n\n**{sensor_name}** ({sensor_type}) [{sensor_unit}]\n\nSelect the local entity to upload, or leave blank to skip:",
+        "data": {
+          "entity_id": "Local Entity"
+        }
+      },
+      "pull_config": {
+        "title": "Configure Pull Mode (Monitor)",
+        "description": "Set the interval for pulling measurements and whether to fall back on cached values during network drops.",
+        "data": {
+          "scan_interval": "Pull Scan Interval (seconds)",
+          "retain_state": "Retain last known states on network timeout"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Failed to connect to openSenseMap. Please check your internet connection and try again.",
+      "invalid_station": "Station ID not found on openSenseMap. Please verify the ID.",
+      "select_at_least_one_mode": "You must select at least one mode: Pull Mode or Push Mode.",
+      "api_key_required": "API Key is required to enable Push Mode."
+    },
+    "abort": {
+      "already_configured": "This openSenseMap station is already configured."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Configure openSenseMap Advanced Options",
+        "description": "Configure pull and push settings.",
+        "data": {
+          "pull_enabled": "Enable Pull Mode (Fetch station data)",
+          "scan_interval": "Pull Scan Interval (seconds)",
+          "retain_state": "Retain last known states on network timeout",
+          "push_enabled": "Enable Push Mode (Export local data)",
+          "api_key": "openSenseMap API Key (Required for Push)",
+          "push_interval": "Minimum Push Interval (seconds)"
+        }
+      },
+      "push_config": {
+        "title": "Map senseBox Sensors",
+        "description": "Map a local Home Assistant entity to the openSenseMap sensor:\n\n**{sensor_name}** ({sensor_type}) [{sensor_unit}]\n\nSelect the local entity to upload, or leave blank to skip:",
+        "data": {
+          "entity_id": "Local Entity"
+        }
+      }
+    },
+    "error": {
+      "api_key_required": "API Key is required to enable Push Mode."
+    }
+  }
+}
