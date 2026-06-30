@@ -32,9 +32,11 @@ from homeassistant.helpers import selector
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 
 from .const import (
+    CONF_PUSH_INTERVAL,
     CONF_RETAIN_STATE,
     CONF_SCAN_INTERVAL,
     CONF_STATION_ID,
+    DEFAULT_PUSH_INTERVAL,
     DEFAULT_SCAN_INTERVAL,
     DOMAIN,
     ERROR_CANNOT_CONNECT,
@@ -294,6 +296,7 @@ class OpenSenseMapConfigFlow(ConfigFlow, domain=DOMAIN):
                 "push_enabled": self.push_enabled,
                 "api_key": self.api_key,
                 "push_mappings_json": json.dumps(self.push_mappings),
+                CONF_PUSH_INTERVAL: DEFAULT_PUSH_INTERVAL,
             },
         )
 
@@ -370,6 +373,9 @@ class OpenSenseMapOptionsFlowHandler(OptionsFlow):
         retain_state = options.get(CONF_RETAIN_STATE, data.get(CONF_RETAIN_STATE, False))
         push_enabled = options.get("push_enabled", data.get("push_enabled", False))
         api_key = options.get("api_key", data.get("api_key", ""))
+        push_interval = options.get(
+            CONF_PUSH_INTERVAL, data.get(CONF_PUSH_INTERVAL, DEFAULT_PUSH_INTERVAL)
+        )
 
         return self.async_show_form(
             step_id="init",
@@ -382,6 +388,9 @@ class OpenSenseMapOptionsFlowHandler(OptionsFlow):
                     vol.Required(CONF_RETAIN_STATE, default=retain_state): bool,
                     vol.Required("push_enabled", default=push_enabled): bool,
                     vol.Optional("api_key", default=api_key): str,
+                    vol.Required(CONF_PUSH_INTERVAL, default=push_interval): vol.All(
+                        vol.Coerce(int), vol.Range(min=5)
+                    ),
                 }
             ),
             errors=errors,

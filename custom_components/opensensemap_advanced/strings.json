@@ -53,7 +53,8 @@
           "scan_interval": "Pull Scan Interval (seconds)",
           "retain_state": "Retain last known states on network timeout",
           "push_enabled": "Enable Push Mode (Export local data)",
-          "api_key": "openSenseMap API Key (Required for Push)"
+          "api_key": "openSenseMap API Key (Required for Push)",
+          "push_interval": "Minimum Push Interval (seconds)"
         }
       },
       "push_config": {

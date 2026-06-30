@@ -30,7 +30,7 @@ from homeassistant.core import Event, HomeAssistant, callback
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 from homeassistant.helpers.event import async_call_later, async_track_state_change_event
 
-from .const import CONF_STATION_ID, DOMAIN, LOGGER
+from .const import CONF_PUSH_INTERVAL, CONF_STATION_ID, DEFAULT_PUSH_INTERVAL, DOMAIN, LOGGER
 from .coordinator import OpenSenseMapCoordinator
 
 PLATFORMS: list[Platform] = [Platform.SENSOR]
@@ -69,7 +69,10 @@ async def async_setup_entry(
             mappings = {}
 
         if api_key and mappings:
-            push_manager = OpenSenseMapPushManager(hass, station_id, api_key, mappings)
+            push_interval = options.get(CONF_PUSH_INTERVAL, DEFAULT_PUSH_INTERVAL)
+            push_manager = OpenSenseMapPushManager(
+                hass, station_id, api_key, mappings, push_interval
+            )
             push_manager.start()
 
     entry.runtime_data = OpenSenseMapRuntimeData(
@@ -112,16 +115,19 @@ class OpenSenseMapPushManager:
         station_id: str,
         api_key: str,
         mappings: dict[str, str],
+        push_interval: int,
     ) -> None:
         """Initialize the push manager."""
         self._hass = hass
         self._station_id = station_id
         self._api_key = api_key
         self._mappings = mappings  # dict of ha_entity_id -> opensensemap_sensor_id
+        self._push_interval = push_interval
 
         self._buffer: dict[str, float] = {}
         self._unsub_listeners: list[Any] = []
         self._unsub_push: Any = None
+        self._last_push_time: float = 0.0
 
     def start(self) -> None:
         """Start listening to state changes on mapped entities."""
@@ -172,11 +178,15 @@ class OpenSenseMapPushManager:
 
         # Schedule push if not already scheduled
         if not self._unsub_push:
-            self._unsub_push = async_call_later(self._hass, 5, self._async_push_data)
+            now = asyncio.get_running_loop().time()
+            elapsed = now - self._last_push_time
+            delay = max(5.0, float(self._push_interval) - elapsed)
+            self._unsub_push = async_call_later(self._hass, delay, self._async_push_data)
 
     async def _async_push_data(self, *_: Any) -> None:
         """Send all buffered measurements in a single POST request."""
         self._unsub_push = None
+        self._last_push_time = asyncio.get_running_loop().time()
         if not self._buffer:
             return
 

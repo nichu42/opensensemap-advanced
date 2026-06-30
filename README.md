@@ -22,16 +22,17 @@ It is developed on Codeberg and mirrored to GitHub to support HACS.
 
 3. **⏱️ Customizable Update Intervals**
    * *Official:* Hardcoded to pull data once every 10 minutes.
-   * *Advanced:* Set your own polling frequency (e.g., once every 60 seconds) directly in the integration's Options UI.
+   * *Advanced:* Set your own polling frequency (default is `60` seconds) directly in the integration's Options UI.
+   * *Polite Pulling:* Fetch data for every sensor on your station simultaneously in a single lightweight HTTP GET request, avoiding redundant network queries.
 
 4. **🛡️ Offline State Caching (Fallback)**
    * *Official:* Marks all sensors as `unavailable` if the API fails or connection drops.
-   * *Advanced:* Opt-in to retain the **last known valid value** during API or internet outages, keeping your history graphs and automations stable.
+   * *Advanced:* Opt-in to retain the last known valid value during API or internet outages, so your dashboard doesn't go empty.
 
 5. **📤 Sensor Data Upload (Exporter/Push Mode)**
    * *Official:* Read-only (Pulling data).
    * *Advanced:* Bridge your local Home Assistant sensors (Zigbee, ESPHome, RTL_433, templates, etc.) directly to your openSenseMap Box.
-   * *Debounced Submissions:* All updates are batched and sent in a single consolidated HTTP POST request every 5 seconds to reduce API overhead.
+   * *Consolidated & Throttled:* All updates are batched locally and sent in a single consolidated HTTP POST request containing all sensor measurements at once. You can configure a Minimum Push Interval (default is 60 seconds) in the Options UI to throttle uploads, protecting the public openSenseMap API from hammering.
 
 ---
 
@@ -49,15 +50,12 @@ It is developed on Codeberg and mirrored to GitHub to support HACS.
 
 ## ⚙️ Configuration
 
-### 📤 Preparing for Push Mode (Data Upload)
+### Optional: Preparing for Push Mode (Data Upload)
 
 If you want to upload local Home Assistant sensor measurements to openSenseMap:
 1. Register an account at [opensensemap.org/account/register](https://opensensemap.org/account/register).
 2. Go to your dashboard and register a new senseBox.
-3. Under the **Hardware** configuration step, select your model:
-   * **`Manual configuration` (Highly Recommended for Home Assistant users):** Choose this if you want to upload generic/custom Home Assistant sensors (e.g. Zigbee sensors, ESPHome, templated sensors). This option allows you to manually add as many sensors as you want and customize their name, phenomenon type (e.g. *Temperature*, *CO2*, *PM2.5*), and unit (e.g. *°C*, *ppm*, *µg/m³*).
-   * **`senseBox:home` / `senseBox:edu`:** Choose this if you are uploading standard weather sensors and want openSenseMap to pre-create standard temperature, humidity, pressure, and light sensors automatically.
-   * `Sensor.Community (luftdaten.info)`, `hackAIR`, `Advanced`, `MQTT`, `The ThingsNetwork - TTN`
+3. Under the **Hardware** configuration step, select your model. `Manual configuration` is highly Recommended for Home Assistant users that want to upload generic/custom Home Assistant sensors (e.g. Zigbee sensors, ESPHome, templated sensors). This option allows you to manually add as many sensors as you want and customize their name, phenomenon type (e.g. *Temperature*, *CO2*, *PM2.5*), and unit (e.g. *°C*, *ppm*, *µg/m³*).
 4. Copy your **API Key** from your openSenseMap account profile page.
 5. Get your **Station ID (Box ID)** from the URL of your box dashboard (the 24-character hexadecimal ID).
 

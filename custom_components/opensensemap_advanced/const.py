@@ -23,8 +23,10 @@ LOGGER = logging.getLogger(__name__)
 CONF_STATION_ID = "station_id"
 CONF_SCAN_INTERVAL = "scan_interval"
 CONF_RETAIN_STATE = "retain_state"
+CONF_PUSH_INTERVAL = "push_interval"
 
-DEFAULT_SCAN_INTERVAL = 600
+DEFAULT_SCAN_INTERVAL = 60
+DEFAULT_PUSH_INTERVAL = 60
 
 # Error messages for translation mapping
 ERROR_CANNOT_CONNECT = "cannot_connect"
