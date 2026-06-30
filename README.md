@@ -49,26 +49,28 @@ It is developed on Codeberg and mirrored to GitHub to support HACS.
 
 ## ⚙️ Configuration
 
+### 📤 Preparing for Push Mode (Data Upload)
+
+If you want to upload local Home Assistant sensor measurements to openSenseMap:
+1. Register an account at [opensensemap.org/account/register](https://opensensemap.org/account/register).
+2. Go to your dashboard and register a new senseBox.
+3. Under the **Hardware** configuration step, select your model:
+   * **`Manual configuration` (Highly Recommended for Home Assistant users):** Choose this if you want to upload generic/custom Home Assistant sensors (e.g. Zigbee sensors, ESPHome, templated sensors). This option allows you to manually add as many sensors as you want and customize their name, phenomenon type (e.g. *Temperature*, *CO2*, *PM2.5*), and unit (e.g. *°C*, *ppm*, *µg/m³*).
+   * **`senseBox:home` / `senseBox:edu`:** Choose this if you are uploading standard weather sensors and want openSenseMap to pre-create standard temperature, humidity, pressure, and light sensors automatically.
+   * `Sensor.Community (luftdaten.info)`, `hackAIR`, `Advanced`, `MQTT`, `The ThingsNetwork - TTN`
+4. Copy your **API Key** from your openSenseMap account profile page.
+5. Get your **Station ID (Box ID)** from the URL of your box dashboard (the 24-character hexadecimal ID).
+
 ### Add the Integration
 1. Go to **Settings** ➡️ **Devices & Services** ➡️ **Add Integration**.
 2. Search for **openSenseMap Advanced**.
-3. Input your **Station ID** (Box ID) and click Submit.
-
-### Adjust Advanced Options (Pull & Push)
-Once added, click **Configure** on the integration card to adjust the settings:
-
-1. **Enable Monitor Mode (Pull data)**: Check to create sensor entities representing the measurements reported by the station.
-2. **Update Interval (seconds)**: Set how frequently Home Assistant pulls data from the openSenseMap API (default is `600` seconds / 10 minutes).
-3. **Retain last known values on connection failure**: Check to prevent entities from going `unavailable` during internet or API dropouts.
-4. **Enable Exporter Mode (Push data)**: Check if you want to upload local Home Assistant sensor states to your openSenseMap Box.
-5. **openSenseMap API Key**: Required if you enabled **Push Mode** (data upload). Enter the API key obtained from your openSenseMap account.
-6. **Push Sensor Mappings (JSON)**: Input a JSON map of your local Home Assistant entity IDs to their corresponding openSenseMap Sensor IDs:
-   ```json
-   {
-     "sensor.backyard_temperature": "62f77dc305b75c001bb659ff",
-     "sensor.backyard_humidity": "62f77dc305b75c001bb65a00"
-   }
-   ```
+3. Enter your **Station ID (Box ID)** or paste the **full URL of your station's page** (the integration automatically extracts the ID for you).
+4. Select the modes you wish to enable:
+   * **Pull Mode (Monitor):** Periodically fetch data from openSenseMap.
+   * **Push Mode (Exporter):** Upload local entity states to openSenseMap.
+5. Follow the wizard steps:
+   * If **Push Mode** is enabled: Enter your API Key, then map each of your openSenseMap sensors to local Home Assistant entities using the dropdown selectors.
+   * If **Pull Mode** is enabled: Configure your update interval and cached state fallback preferences.
 
 ---
 

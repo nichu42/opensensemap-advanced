@@ -12,7 +12,7 @@
       },
       "push_api_key": {
         "title": "Configure Push API Key",
-        "description": "Please enter your openSenseMap API key (obtained from your openSenseMap dashboard) to authorize uploads.",
+        "description": "To upload measurements, you need an openSenseMap account and a registered senseBox:\n\n1. Register an account at [opensensemap.org/account/register](https://opensensemap.org/account/register).\n2. Register a new senseBox in your dashboard.\n3. Under **Hardware**, select your model. **To upload generic Home Assistant sensors** (like Zigbee or ESPHome), choose **Manual configuration** and manually define the sensors you want to export (e.g. title 'Temperatur', unit '°C').\n4. Copy the API Key from your openSenseMap profile and paste it below:",
         "data": {
           "api_key": "openSenseMap API Key"
         }
