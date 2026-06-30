@@ -61,7 +61,7 @@ Once added, click **Configure** on the integration card to adjust the settings:
 2. **Update Interval (seconds)**: Set how frequently Home Assistant pulls data from the openSenseMap API (default is `600` seconds / 10 minutes).
 3. **Retain last known values on connection failure**: Check to prevent entities from going `unavailable` during internet or API dropouts.
 4. **Enable Exporter Mode (Push data)**: Check if you want to upload local Home Assistant sensor states to your openSenseMap Box.
-5. **API Key / Token (Optional)**: If your openSenseMap box requires authentication (a private/secure box), enter your API key here.
+5. **openSenseMap API Key**: Required if you enabled **Push Mode** (data upload). Enter the API key obtained from your openSenseMap account.
 6. **Push Sensor Mappings (JSON)**: Input a JSON map of your local Home Assistant entity IDs to their corresponding openSenseMap Sensor IDs:
    ```json
    {

@@ -2,16 +2,42 @@
   "config": {
     "step": {
       "user": {
-        "title": "Set up openSenseMap Advanced",
-        "description": "Enter the ID of your openSenseMap station (senseBox). You can find this in the URL of your station on opensensemap.org.",
+        "title": "Welcome to openSenseMap Advanced",
+        "description": "Choose how you want to configure your openSenseMap station (senseBox):\n\n• **Pull Mode (Monitor):** Periodically fetch environmental measurements from your station and create sensor entities in Home Assistant.\n• **Push Mode (Exporter):** Send local Home Assistant sensor states directly to your openSenseMap Box.\n\n*Tip: You can find your Box ID in the URL of your station's page on [openSenseMap](https://opensensemap.org) (e.g. the alphanumeric string at the end of the URL).* ",
         "data": {
-          "station_id": "Station ID (senseBox ID)"
+          "station_id": "Station ID (senseBox ID)",
+          "pull_enabled": "Enable Pull Mode (Monitor)",
+          "push_enabled": "Enable Push Mode (Exporter)"
+        }
+      },
+      "push_api_key": {
+        "title": "Configure Push API Key",
+        "description": "Please enter your openSenseMap API key (obtained from your openSenseMap dashboard) to authorize uploads.",
+        "data": {
+          "api_key": "openSenseMap API Key"
+        }
+      },
+      "push_config": {
+        "title": "Map senseBox Sensors",
+        "description": "Map a local Home Assistant entity to the openSenseMap sensor:\n\n**{sensor_name}** ({sensor_type}) [{sensor_unit}]\n\nSelect the local entity to upload, or leave blank to skip:",
+        "data": {
+          "entity_id": "Local Entity"
+        }
+      },
+      "pull_config": {
+        "title": "Configure Pull Mode (Monitor)",
+        "description": "Set the interval for pulling measurements and whether to fall back on cached values during network drops.",
+        "data": {
+          "scan_interval": "Pull Scan Interval (seconds)",
+          "retain_state": "Retain last known states on network timeout"
         }
       }
     },
     "error": {
       "cannot_connect": "Failed to connect to openSenseMap. Please check your internet connection and try again.",
-      "invalid_station": "Station ID not found on openSenseMap. Please verify the ID."
+      "invalid_station": "Station ID not found on openSenseMap. Please verify the ID.",
+      "select_at_least_one_mode": "You must select at least one mode: Pull Mode or Push Mode.",
+      "api_key_required": "API Key is required to enable Push Mode."
     },
     "abort": {
       "already_configured": "This openSenseMap station is already configured."
@@ -21,20 +47,25 @@
     "step": {
       "init": {
         "title": "Configure openSenseMap Advanced Options",
-        "description": "Configure pull and push settings. Map Home Assistant entity states to openSenseMap sensor IDs in JSON format (e.g., `{\"sensor.my_temp\": \"opensensemap_sensor_id\"}`).",
+        "description": "Configure pull and push settings.",
         "data": {
           "pull_enabled": "Enable Pull Mode (Fetch station data)",
           "scan_interval": "Pull Scan Interval (seconds)",
           "retain_state": "Retain last known states on network timeout",
           "push_enabled": "Enable Push Mode (Export local data)",
-          "api_key": "openSenseMap API Key (Required for Push)",
-          "push_mappings_json": "Entity Mappings JSON (dict of ha_entity_id: sensebox_sensor_id)"
+          "api_key": "openSenseMap API Key (Required for Push)"
+        }
+      },
+      "push_config": {
+        "title": "Map senseBox Sensors",
+        "description": "Map a local Home Assistant entity to the openSenseMap sensor:\n\n**{sensor_name}** ({sensor_type}) [{sensor_unit}]\n\nSelect the local entity to upload, or leave blank to skip:",
+        "data": {
+          "entity_id": "Local Entity"
         }
       }
     },
     "error": {
-      "api_key_required": "API Key is required to enable Push Mode.",
-      "invalid_mappings": "Invalid Entity Mappings JSON format. Ensure it is a valid JSON dictionary mapping string entity IDs to string sensor IDs."
+      "api_key_required": "API Key is required to enable Push Mode."
     }
   }
 }
