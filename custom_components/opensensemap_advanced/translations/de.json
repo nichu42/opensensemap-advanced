@@ -3,7 +3,7 @@
     "step": {
       "user": {
         "title": "Willkommen bei openSenseMap Advanced",
-        "description": "Wählen Sie aus, wie Sie Ihre openSenseMap-Station (senseBox) konfigurieren möchten:\n\n• **Pull-Modus (Monitor):** Holt regelmäßig Messwerte von Ihrer Station ab und erstellt Sensor-Entitäten in Home Assistant.\n• **Push-Modus (Exporter):** Sendet lokale Home Assistant-Sensorzustände direkt an Ihre openSenseMap-Box.\n\n*Tipp: Sie finden Ihre Box-ID in der URL der Detailseite Ihrer Station auf [openSenseMap](https://opensensemap.org) (die alphanumerische Zeichenkette am Ende des URL-Pfads).* ",
+        "description": "Wähle aus, wie du deine openSenseMap-Station (senseBox) konfigurieren möchtest:\n\n• **Pull-Modus (Monitor):** Holt regelmäßig Messwerte von deiner Station ab und erstellt Sensor-Entitäten in Home Assistant.\n• **Push-Modus (Exporter):** Sendet lokale Home Assistant-Sensorzustände direkt an deine openSenseMap-Box.\n\n*Tipp: Du findest deine Box-ID in der URL der Detailseite deiner Station auf [openSenseMap](https://opensensemap.org) (die alphanumerische Zeichenkette am Ende des URL-Pfads).* ",
         "data": {
           "station_id": "Station-ID (senseBox-ID)",
           "pull_enabled": "Pull-Modus aktivieren (Monitor)",
@@ -12,21 +12,21 @@
       },
       "push_api_key": {
         "title": "Push-API-Key konfigurieren",
-        "description": "Um Messwerte hochzuladen, benötigen Sie ein openSenseMap-Konto und eine registrierte senseBox:\n\n1. Registrieren Sie ein Konto auf [opensensemap.org/account/register](https://opensensemap.org/account/register).\n2. Registrieren Sie eine neue senseBox in Ihrem Dashboard.\n3. Wählen Sie unter **Hardware** Ihr Modell aus. **Um generische Home Assistant-Sensoren** (wie Zigbee oder ESPHome) hochzuladen, wählen Sie **Manuelle Konfiguration** und definieren Sie die Sensoren, die Sie exportieren möchten (z. B. Titel 'Temperatur', Einheit '°C').\n4. Kopieren Sie den API-Key aus Ihrem openSenseMap-Profil und fügen Sie ihn unten ein:",
+        "description": "Um Messwerte hochzuladen, benötigst du ein openSenseMap-Konto und eine registrierte senseBox:\n\n1. Registriere ein Konto auf [opensensemap.org/account/register](https://opensensemap.org/account/register).\n2. Registriere eine neue senseBox in deinem Dashboard.\n3. Wähle unter **Hardware** dein Modell aus. **Um generische Home Assistant-Sensoren** (wie Zigbee oder ESPHome) hochzuladen, wähle **Manuelle Konfiguration** und definiere die Sensoren, die du exportieren möchtest (z. B. Titel 'Temperatur', Einheit '°C').\n4. Kopiere den API-Key aus deinem openSenseMap-Profil und füge ihn unten ein:",
         "data": {
           "api_key": "openSenseMap API-Key"
         }
       },
       "push_config": {
         "title": "senseBox-Sensoren zuordnen",
-        "description": "Ordnen Sie dem openSenseMap-Sensor eine lokale Home Assistant-Entität zu:\n\n**{sensor_name}** ({sensor_type}) [{sensor_unit}]\n\nWählen Sie die zu exportierende lokale Entität aus oder lassen Sie das Feld leer, um diesen Sensor zu überspringen:",
+        "description": "Ordne dem openSenseMap-Sensor eine lokale Home Assistant-Entität zu:\n\n**{sensor_name}** ({sensor_type}) [{sensor_unit}]\n\nWähle die zu exportierende lokale Entität aus oder lass das Feld leer, um diesen Sensor zu überspringen:",
         "data": {
           "entity_id": "Lokale Entität"
         }
       },
       "pull_config": {
         "title": "Pull-Modus konfigurieren (Monitor)",
-        "description": "Legen Sie das Intervall für das Abrufen der Messwerte fest und entscheiden Sie, ob bei Netzwerkfehlern die letzten bekannten Werte beibehalten werden sollen.",
+        "description": "Lege das Intervall für das Abrufen der Messwerte fest und entscheide, ob bei Netzwerkfehlern die letzten bekannten Werte beibehalten werden sollen.",
         "data": {
           "scan_interval": "Abrufintervall (Sekunden)",
           "retain_state": "Letzte bekannte Zustände bei Netzwerk-Timeout beibehalten"
@@ -34,20 +34,20 @@
       }
     },
     "error": {
-      "cannot_connect": "Verbindung zu openSenseMap-API fehlgeschlagen. Bitte überprüfen Sie Ihre Internetverbindung.",
-      "invalid_station": "Station-ID nicht auf openSenseMap gefunden. Bitte überprüfen Sie die ID.",
-      "select_at_least_one_mode": "Sie müssen mindestens einen Modus auswählen: Pull-Modus oder Push-Modus.",
+      "cannot_connect": "Verbindung zu openSenseMap-API fehlgeschlagen. Bitte überprüfe deine Internetverbindung.",
+      "invalid_station": "Station-ID nicht auf openSenseMap gefunden. Bitte überprüfe die ID.",
+      "select_at_least_one_mode": "Du musst mindestens einen Modus auswählen: Pull-Modus oder Push-Modus.",
       "api_key_required": "API-Key ist erforderlich, um den Push-Modus zu aktivieren."
     },
     "abort": {
-      "already_configured": "Diese openSenseMap-Station ist bereits konfiguriert."
+      "already_configured": "Diese openSenseMap-Station is bereits konfiguriert."
     }
   },
   "options": {
     "step": {
       "init": {
         "title": "Optionen für openSenseMap Advanced konfigurieren",
-        "description": "Konfigurieren Sie die Pull- und Push-Einstellungen.",
+        "description": "Konfiguriere die Pull- und Push-Einstellungen.",
         "data": {
           "pull_enabled": "Pull-Modus aktivieren (Messwerte abrufen)",
           "scan_interval": "Abrufintervall (Sekunden)",
@@ -59,7 +59,7 @@
       },
       "push_config": {
         "title": "senseBox-Sensoren zuordnen",
-        "description": "Ordnen Sie dem openSenseMap-Sensor eine lokale Home Assistant-Entität zu:\n\n**{sensor_name}** ({sensor_type}) [{sensor_unit}]\n\nWählen Sie die zu exportierende lokale Entität aus oder lassen Sie das Feld leer, um diesen Sensor zu überspringen:",
+        "description": "Ordne dem openSenseMap-Sensor eine lokale Home Assistant-Entität zu:\n\n**{sensor_name}** ({sensor_type}) [{sensor_unit}]\n\nWähle die zu exportierende lokale Entität aus oder lass das Feld leer, um diesen Sensor zu überspringen:",
         "data": {
           "entity_id": "Lokale Entität"
         }
