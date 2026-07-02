@@ -55,7 +55,7 @@ class OpenSenseMapSensorData:
     unit: str
     sensor_type: str
     value: float | None
-    created_at: str | None
+    created_at: datetime | None
 
 
 @dataclass
@@ -157,13 +157,18 @@ class OpenSenseMapCoordinator(DataUpdateCoordinator[OpenSenseMapStationData]):
                 except ValueError:
                     LOGGER.warning("Could not convert sensor value '%s' to float", raw_value)
 
+            # Parse created_at to a timezone-aware datetime object
+            created_at_dt: datetime | None = None
+            if created_at:
+                created_at_dt = dt_util.parse_datetime(created_at)
+
             sensors_dict[sensor_id] = OpenSenseMapSensorData(
                 id=sensor_id,
                 title=title,
                 unit=unit,
                 sensor_type=sensor_type,
                 value=value,
-                created_at=created_at,
+                created_at=created_at_dt,
             )
 
         station_data = OpenSenseMapStationData(
