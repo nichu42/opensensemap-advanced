@@ -71,7 +71,7 @@ async def async_setup_entry(
         if api_key and mappings:
             push_interval = options.get(CONF_PUSH_INTERVAL, DEFAULT_PUSH_INTERVAL)
             push_manager = OpenSenseMapPushManager(
-                hass, station_id, api_key, mappings, push_interval
+                hass, entry, station_id, api_key, mappings, push_interval
             )
             push_manager.start()
 
@@ -112,6 +112,7 @@ class OpenSenseMapPushManager:
     def __init__(
         self,
         hass: HomeAssistant,
+        config_entry: ConfigEntry,
         station_id: str,
         api_key: str,
         mappings: dict[str, str],
@@ -119,6 +120,7 @@ class OpenSenseMapPushManager:
     ) -> None:
         """Initialize the push manager."""
         self._hass = hass
+        self._config_entry = config_entry
         self._station_id = station_id
         self._api_key = api_key
         self._mappings = mappings  # dict of ha_entity_id -> opensensemap_sensor_id
@@ -128,6 +130,7 @@ class OpenSenseMapPushManager:
         self._unsub_listeners: list[Any] = []
         self._unsub_push: Any = None
         self._last_push_time: float = 0.0
+        self._last_push_failed: bool = False
 
     def start(self) -> None:
         """Start listening to state changes on mapped entities."""
@@ -212,6 +215,9 @@ class OpenSenseMapPushManager:
                         len(payload),
                         self._station_id,
                     )
+                    if self._last_push_failed:
+                        self._fire_logbook_entry("Push connection restored. Successfully uploaded measurements.")
+                        self._last_push_failed = False
                 else:
                     text = await response.text()
                     LOGGER.error(
@@ -219,5 +225,35 @@ class OpenSenseMapPushManager:
                         response.status,
                         text,
                     )
+                    self._fire_logbook_entry(f"Error uploading measurements (HTTP {response.status}): {text}")
+                    self._last_push_failed = True
         except Exception as err:
             LOGGER.error("Failed to push data to openSenseMap API: %s", err)
+            self._fire_logbook_entry(f"Failed to push data to openSenseMap API: {err}")
+            self._last_push_failed = True
+
+    def _fire_logbook_entry(self, message: str) -> None:
+        """Fire a logbook entry event associated with the push exporter."""
+        try:
+            from homeassistant.helpers import entity_registry as er
+            entity_reg = er.async_get(self._hass)
+            entries = er.async_entries_for_config_entry(entity_reg, self._config_entry.entry_id)
+            
+            # Prefer the last update sensor if available, otherwise pick the first entity
+            target_unique_id = f"opensensemap_last_successful_update_{self._station_id}"
+            entity_id = next(
+                (e.entity_id for e in entries if e.unique_id == target_unique_id), 
+                next((e.entity_id for e in entries), None)
+            )
+            
+            event_data = {
+                "name": f"senseBox Exporter ({self._station_id})",
+                "message": message,
+                "domain": DOMAIN,
+            }
+            if entity_id:
+                event_data["entity_id"] = entity_id
+                
+            self._hass.bus.async_fire("logbook_entry", event_data)
+        except Exception as err:
+            LOGGER.warning("Failed to fire logbook entry for push exporter: %s", err)

@@ -19,7 +19,7 @@ from __future__ import annotations
 
 import asyncio
 from dataclasses import dataclass
-from datetime import timedelta
+from datetime import datetime, timedelta
 import socket
 from typing import TYPE_CHECKING, Any, override
 
@@ -29,6 +29,7 @@ from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
+from homeassistant.util import dt as dt_util
 
 from .const import (
     CONF_RETAIN_STATE,
@@ -82,6 +83,8 @@ class OpenSenseMapCoordinator(DataUpdateCoordinator[OpenSenseMapStationData]):
         """Initialize the coordinator."""
         self.station_id = config_entry.data[CONF_STATION_ID]
         self.last_known_data: OpenSenseMapStationData | None = None
+        self.last_update_success_time: datetime | None = None
+        self._last_update_failed: bool = False
 
         scan_interval = config_entry.options.get(
             CONF_SCAN_INTERVAL,
@@ -117,7 +120,11 @@ class OpenSenseMapCoordinator(DataUpdateCoordinator[OpenSenseMapStationData]):
                     "Error connecting to openSenseMap API: %s. Retaining last known sensor states.",
                     err,
                 )
+                self._fire_logbook_entry(f"Connection failed ({err}). Retained cached sensor states.")
+                self._last_update_failed = True
                 return self.last_known_data
+            self._fire_logbook_entry(f"Failed to communicate with openSenseMap API: {err}")
+            self._last_update_failed = True
             raise UpdateFailed(f"Error communicating with openSenseMap API: {err}") from err
 
         # Parse station level info
@@ -168,5 +175,38 @@ class OpenSenseMapCoordinator(DataUpdateCoordinator[OpenSenseMapStationData]):
             sensors=sensors_dict,
         )
 
+        if self._last_update_failed:
+            self._fire_logbook_entry("Connection restored. Successfully fetched measurements.")
+            self._last_update_failed = False
+
         self.last_known_data = station_data
+        self.last_update_success_time = dt_util.utcnow()
         return station_data
+
+    def _fire_logbook_entry(self, message: str) -> None:
+        """Fire a logbook entry event associated with the station."""
+        try:
+            from homeassistant.helpers import entity_registry as er
+            entity_reg = er.async_get(self.hass)
+            entries = er.async_entries_for_config_entry(entity_reg, self.config_entry.entry_id)
+            
+            # Prefer the last update sensor
+            target_unique_id = f"opensensemap_last_successful_update_{self.station_id}"
+            entity_id = next(
+                (e.entity_id for e in entries if e.unique_id == target_unique_id), 
+                next((e.entity_id for e in entries), None)
+            )
+            
+            name = self.last_known_data.name if self.last_known_data else f"openSenseMap Station {self.station_id}"
+            
+            event_data = {
+                "name": name,
+                "message": message,
+                "domain": DOMAIN,
+            }
+            if entity_id:
+                event_data["entity_id"] = entity_id
+                
+            self.hass.bus.async_fire("logbook_entry", event_data)
+        except Exception as err:
+            LOGGER.warning("Failed to fire logbook entry: %s", err)

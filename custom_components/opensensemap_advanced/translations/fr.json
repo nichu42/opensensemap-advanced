@@ -68,5 +68,12 @@
     "error": {
       "api_key_required": "La clé API est requise pour activer le mode Push."
     }
+  },
+  "entity": {
+    "sensor": {
+      "last_successful_update": {
+        "name": "Dernière mise à jour réussie"
+      }
+    }
   }
 }

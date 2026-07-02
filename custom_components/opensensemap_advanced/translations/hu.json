@@ -68,5 +68,12 @@
     "error": {
       "api_key_required": "A Push mód engedélyezéséhez meg kell adnod az API kulcsot."
     }
+  },
+  "entity": {
+    "sensor": {
+      "last_successful_update": {
+        "name": "Utolsó sikeres frissítés"
+      }
+    }
   }
 }

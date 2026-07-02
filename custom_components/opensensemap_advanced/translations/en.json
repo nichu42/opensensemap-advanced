@@ -68,5 +68,12 @@
     "error": {
       "api_key_required": "API Key is required to enable Push Mode."
     }
+  },
+  "entity": {
+    "sensor": {
+      "last_successful_update": {
+        "name": "Last successful update"
+      }
+    }
   }
 }

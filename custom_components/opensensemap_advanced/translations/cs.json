@@ -68,5 +68,12 @@
     "error": {
       "api_key_required": "Pro aktivaci režimu Push je vyžadován API klíč."
     }
+  },
+  "entity": {
+    "sensor": {
+      "last_successful_update": {
+        "name": "Poslední úspěšná aktualizace"
+      }
+    }
   }
 }

@@ -68,5 +68,12 @@
     "error": {
       "api_key_required": "Klucz API jest wymagany do włączenia trybu Push."
     }
+  },
+  "entity": {
+    "sensor": {
+      "last_successful_update": {
+        "name": "Ostatnia pomyślna aktualizacja"
+      }
+    }
   }
 }

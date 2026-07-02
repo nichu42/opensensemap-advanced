@@ -68,5 +68,12 @@
     "error": {
       "api_key_required": "Изисква се API ключ за активиране на режим Push."
     }
+  },
+  "entity": {
+    "sensor": {
+      "last_successful_update": {
+        "name": "Последна успешна актуализация"
+      }
+    }
   }
 }

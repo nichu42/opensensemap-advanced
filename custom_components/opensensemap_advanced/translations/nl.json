@@ -68,5 +68,12 @@
     "error": {
       "api_key_required": "API-sleutel is vereist om de Push-modus in te schakelen."
     }
+  },
+  "entity": {
+    "sensor": {
+      "last_successful_update": {
+        "name": "Laatste succesvolle update"
+      }
+    }
   }
 }

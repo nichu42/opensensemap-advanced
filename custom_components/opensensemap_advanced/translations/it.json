@@ -68,5 +68,12 @@
     "error": {
       "api_key_required": "La chiave API è richiesta per abilitare la Modalità Push."
     }
+  },
+  "entity": {
+    "sensor": {
+      "last_successful_update": {
+        "name": "Ultimo aggiornamento riuscito"
+      }
+    }
   }
 }
