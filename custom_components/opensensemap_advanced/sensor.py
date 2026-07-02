@@ -17,7 +17,6 @@
 
 from __future__ import annotations
 
-from datetime import datetime
 from typing import override
 
 from homeassistant.components.sensor import (
@@ -25,7 +24,6 @@ from homeassistant.components.sensor import (
     SensorEntity,
     SensorStateClass,
 )
-from homeassistant.const import EntityCategory
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.device_registry import DeviceInfo
 from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
@@ -91,11 +89,10 @@ async def async_setup_entry(
         return
 
     # Add entities for all sensors configured on the station
-    entities: list[SensorEntity] = [
+    entities = [
         OpenSenseMapSensor(coordinator, sensor_id)
         for sensor_id in coordinator.data.sensors
     ]
-    entities.append(OpenSenseMapLastUpdateSensor(coordinator))
     async_add_entities(entities)
 
 
@@ -142,39 +139,6 @@ class OpenSenseMapSensor(CoordinatorEntity[OpenSenseMapCoordinator], SensorEntit
             "last_measurement": sensor_config.created_at,
             "last_successful_update": self.coordinator.last_update_success_time,
         }
-
-    @property
-    @override
-    def device_info(self) -> DeviceInfo:
-        """Return device details linking all sensors to a single station device."""
-        return DeviceInfo(
-            identifiers={(DOMAIN, self.coordinator.station_id)},
-            name=self.coordinator.data.name,
-            model=self.coordinator.data.model,
-            manufacturer="openSenseMap",
-            configuration_url=f"https://opensensemap.org/explore/{self.coordinator.station_id}",
-        )
-
-
-class OpenSenseMapLastUpdateSensor(CoordinatorEntity[OpenSenseMapCoordinator], SensorEntity):
-    """Sensor representing the last successful update timestamp from openSenseMap."""
-
-    _attr_attribution = "Data provided by openSenseMap"
-    _attr_has_entity_name = True
-    _attr_device_class = SensorDeviceClass.TIMESTAMP
-    _attr_entity_category = EntityCategory.DIAGNOSTIC
-    _attr_translation_key = "last_successful_update"
-
-    def __init__(self, coordinator: OpenSenseMapCoordinator) -> None:
-        """Initialize the sensor."""
-        super().__init__(coordinator)
-        self._attr_unique_id = f"opensensemap_last_successful_update_{coordinator.station_id}"
-
-    @property
-    @override
-    def native_value(self) -> datetime | None:
-        """Return the last successful update time."""
-        return self.coordinator.last_update_success_time
 
     @property
     @override
