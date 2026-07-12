@@ -3,7 +3,7 @@
     "step": {
       "user": {
         "title": "Vítejte v openSenseMap Advanced",
-        "description": "Vyber, jak chceš nakonfigurovat svoji stanici openSenseMap (senseBox):\n\n• **Režim Pull (Monitorování):** Periodicky stahuje měření z tvé stanice a vytváří senzory v Home Assistant.\n• **Režim Push (Export):** Odesílá stavy lokálních senzorů Home Assistant přímo do tvé openSenseMap Box.\n\n*Tip: ID své Box najdeš v adrese URL stránky tvé stanice na [openSenseMap](https://opensensemap.org) (alfanumerický řetězec na konci adresy URL).* ",
+        "description": "Choose how you want to configure your openSenseMap station (senseBox):\n\n• **Pull Mode (Monitor):** Periodically fetch environmental measurements from your station and create sensor entities in Home Assistant.\n• **Push Mode (Exporter):** Send local Home Assistant sensor states directly to your openSenseMap Box.\n\n*Tip: You can find your Box ID in the URL of your station's page on [openSenseMap](https://opensensemap.org) (e.g. the alphanumeric string at the end of the URL).*\n\nNeed help or want to report an issue? Visit the [openSenseMap Advanced repository](https://github.com/nichu42/opensensemap-advanced).",
         "data": {
           "station_id": "ID stanice (senseBox ID)",
           "pull_enabled": "Povolit režim Pull (Monitorování)",
