@@ -7,7 +7,7 @@
   "integration_type": "service",
   "iot_class": "cloud_polling",
   "issue_tracker": "https://github.com/nichu42/opensensemap-advanced/issues",
-  "quality_scale": "silver",
+  "quality_scale": "bronze",
   "requirements": [],
   "version": "0.10"
 }
