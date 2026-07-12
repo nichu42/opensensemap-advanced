@@ -3,7 +3,7 @@
     "step": {
       "user": {
         "title": "Üdvözöl az openSenseMap Advanced",
-        "description": "Válaszd ki, hogyan szeretnéd konfigurálni az openSenseMap állomásodat (senseBox):\n\n• **Pull mód (Monitor):** Rendszeresen lekéri a környezeti méréseket az állomásról, és érzékelő entitásokat hoz létre a Home Assistantban.\n• **Push mód (Exportőr):** Közvetlenül az openSenseMap Box-ba küldi a helyi Home Assistant érzékelők állapotát.\n\n*Tipp: A Box ID-t az állomás oldalának URL-címében találod meg az [openSenseMap](https://opensensemap.org) oldalon (az URL végén található alfanumerikus karakterlánc).* ",
+        "description": "Válassza ki, hogyan szeretné konfigurálni az openSenseMap állomását (senseBox):\n\n• **Pull mód (Monitor):** Időszakosan lekéri a környezeti méréseket az állomásról, és szenszor entitásokat hoz létre a Home Assistantban.\n• **Push mód (Exportőr):** A helyi Home Assistant szenszorok állapotait közvetlenül az openSenseMap Box-ra küldi.\n\n*Tipp: A Box ID-t az állomás oldalának URL-jében találja az [openSenseMap](https://opensensemap.org) oldalon (például az URL végén lévő alfanumerikus karakterlánc).*\n\nSegítségre van szüksége, vagy problémát szeretne bejelenteni? Látogasson el az [openSenseMap Advanced tárolóhoz](https://github.com/nichu42/opensensemap-advanced).",
         "data": {
           "station_id": "Állomás ID (senseBox ID)",
           "pull_enabled": "Pull mód engedélyezése (Monitor)",

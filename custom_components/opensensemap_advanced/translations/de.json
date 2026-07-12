@@ -3,7 +3,8 @@
     "step": {
       "user": {
         "title": "Willkommen bei openSenseMap Advanced",
-        "description": "Wähle aus, wie du deine openSenseMap-Station (senseBox) konfigurieren möchtest:\n\n• **Pull-Modus (Monitor):** Holt regelmäßig Messwerte von deiner Station ab und erstellt Sensor-Entitäten in Home Assistant.\n• **Push-Modus (Exporter):** Sendet lokale Home Assistant-Sensorzustände direkt an deine openSenseMap-Box.\n\n*Tipp: Du findest deine Box-ID in der URL der Detailseite deiner Station auf [openSenseMap](https://opensensemap.org) (die alphanumerische Zeichenkette am Ende des URL-Pfads).* ",
+        "description": "Wähle aus, wie du deine openSenseMap-Station (senseBox) konfigurieren möchtest:\n\n• **Pull-Modus (Monitor):** Ruft in regelmäßigen Abständen Umweltmesswerte von deiner Station ab und erstellt Sensor-Entitäten in Home Assistant.\n• **Push-Modus (Exporter):** Sendet lokale Home Assistant-Sensorzustände direkt an deine openSenseMap-Box.\n\n*Tipp: Du findest deine Box-ID in der URL der Stationsseite auf [openSenseMap](https://opensensemap.org) (z. B. die alphanumerische Zeichenkette am Ende der URL).*\n\nDu brauchst Hilfe oder möchtest ein Problem melden? Besuche das [openSenseMap Advanced Repository](https://github.com/nichu42/opensensemap-advanced).",
+
         "data": {
           "station_id": "Station-ID (senseBox-ID)",
           "pull_enabled": "Pull-Modus aktivieren (Monitor)",

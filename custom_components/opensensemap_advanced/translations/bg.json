@@ -3,7 +3,7 @@
     "step": {
       "user": {
         "title": "Добре дошли в openSenseMap Advanced",
-        "description": "Избери как искаш да конфигурираш твоята openSenseMap станция (senseBox):\n\n• **Режим Pull (Мониторинг):** Периодично извлича измервания от твоята станция и създава сензори в Home Assistant.\n• **Режим Push (Експортиране):** Изпраща състоянията на локалните сензори от Home Assistant директно към твоята openSenseMap Box.\n\n*Съвет: Можеш да намериш идентификатора на твоята Box в URL адреса на страницата на твоята станция в [openSenseMap](https://opensensemap.org) (буквено-цифровия низ в края на URL адреса).* ",
+        "description": "Изберете как искате да конфигурирате вашата openSenseMap станция (senseBox):\n\n• **Pull режим (Монитор):** Периодично извлича измервания на околната среда от вашата станция и създава сензорни обекти в Home Assistant.\n• **Push режим (Експортьор):** Изпраща състоянията на локалните Home Assistant сензори директно към вашата openSenseMap Box.\n\n*Съвет: Можете да намерите Box ID в URL адреса на страницата на вашата станция в [openSenseMap](https://opensensemap.org) (напр. буквено-цифровият низ в края на URL адреса).*\n\nИмате нужда от помощ или искате да съобщите за проблем? Посетете [openSenseMap Advanced хранилището](https://github.com/nichu42/opensensemap-advanced).",
         "data": {
           "station_id": "Идентификатор на станцията (senseBox ID)",
           "pull_enabled": "Активиране на режим Pull (Мониторинг)",
