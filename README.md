@@ -1,13 +1,9 @@
 # openSenseMap Advanced for Home Assistant
 
-> ℹ️ **Project Home:** This integration is developed and maintained on **[Codeberg](https://codeberg.org/nichu42/opensensemap-advanced)**. If you are viewing this on GitHub, this is a read-only mirror. Please submit all issues, pull requests, and contributions directly to Codeberg.
-
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg)](https://github.com/hacs/integration)
 
 An advanced, feature-rich custom integration for [openSenseMap](https://opensensemap.org) in Home Assistant. This integration is built entirely from scratch with zero external dependencies, designed for power users who need finer control, reliability, and the ability to upload local sensor data.
-
-It is developed on Codeberg and mirrored to GitHub to support HACS.
 
 ---
 
