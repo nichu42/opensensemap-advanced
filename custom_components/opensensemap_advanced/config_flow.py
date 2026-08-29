@@ -21,6 +21,7 @@ import asyncio
 import json
 import socket
 from typing import Any, override
+from urllib.parse import urlparse
 
 import aiohttp
 import voluptuous as vol
@@ -143,7 +144,7 @@ class OpenSenseMapConfigFlow(ConfigFlow, domain=DOMAIN):
             raw_input = user_input[CONF_STATION_ID].strip()
             # If the user pasted a full URL, extract the last path segment (Station ID)
             # URL format: https://opensensemap.org/explore/62f77dc305b75c001bb659fe
-            if "opensensemap.org" in raw_input:
+            if urlparse(raw_input).hostname == "opensensemap.org":
                 clean_url = raw_input.rstrip("/")
                 self.station_id = clean_url.split("/")[-1].split("?")[0].strip()
             else:
